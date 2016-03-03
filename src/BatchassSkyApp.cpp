@@ -30,6 +30,8 @@
 #include "VDSettings.h"
 // Utils
 #include "VDUtils.h"
+// Audio
+#include "VDAudio.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -74,6 +76,8 @@ private:
 	VDSettingsRef	mVDSettings;
 	// Utils
 	VDUtilsRef		mVDUtils;
+	// Audio
+	VDAudioRef		mVDAudio;
 
 	bool			mUseBeginEnd;
 
@@ -106,6 +110,10 @@ void BatchassSkyApp::setup()
 	// Utils
 	mVDUtils = VDUtils::create(mVDSettings);
 	mVDUtils->getWindowsResolution();
+	// Audio
+	mVDAudio = VDAudio::create(mVDSettings);
+	fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
+	mVDAudio->loadWaveFile(waveFile.string());
 	setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
 	setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
 	// create a batch with our tesselation shader
@@ -170,6 +178,7 @@ void BatchassSkyApp::cleanup()
 
 void BatchassSkyApp::update()
 {
+	mVDAudio->update();
 	updateWindowTitle();
 }
 // Render the scene into the FBO
@@ -212,15 +221,15 @@ void BatchassSkyApp::draw()
 	gl::clear(Color::black());
 	//renderSceneToFbo();
 
-
 	// setup basic camera
 	auto cam = CameraPersp(getWindowWidth(), getWindowHeight(), 60, 1, 1000).calcFraming(Sphere(vec3(0.0f), 1.25f));
 	gl::setMatrices(cam);
-	gl::rotate(getElapsedSeconds() * 0.1f, vec3(0.123, 0.456, 0.789));
+	//gl::rotate(getElapsedSeconds() * 0.1f, vec3(0.123, 0.456, 0.789));
+	gl::rotate(getElapsedSeconds() * 0.1f + mVDSettings->maxVolume/100, vec3(0.123, 0.456, 0.789));
 	gl::viewport(getWindowSize());
 
 	// update uniforms
-	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel);
+	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel + mVDSettings->maxVolume/10);
 	mBatch->getGlslProg()->uniform("uTessLevelOuter", mOuterLevel);
 
 	// bypass gl::Batch::draw method so we can use GL_PATCHES
@@ -233,7 +242,6 @@ void BatchassSkyApp::draw()
 		glDrawElements(GL_PATCHES, mBatch->getVboMesh()->getNumIndices(), mBatch->getVboMesh()->getIndexDataType(), (GLvoid*)(0));
 	else
 		glDrawArrays(GL_PATCHES, 0, mBatch->getVboMesh()->getNumIndices());
-
 
 		/*for (auto &warp : mWarps) {
 			if (mUseBeginEnd) {
