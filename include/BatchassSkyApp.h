@@ -76,10 +76,10 @@ private:
 
 	fs::path		mSettings;
 
-	gl::TextureRef	mImage;
 	WarpList		mWarps;
 
-	Area			mSrcArea;
+	Area			mSrcArea1;
+	Area			mSrcArea2;
 
 	gl::BatchRef	mBatch;
 	float			mInnerLevel, mOuterLevel;

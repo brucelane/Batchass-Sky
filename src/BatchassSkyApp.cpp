@@ -65,25 +65,15 @@ void BatchassSkyApp::setup()
 	else {
 		// otherwise create a warp from scratch
 		mWarps.push_back(WarpPerspectiveBilinear::create());
+		mWarps.push_back(WarpPerspectiveBilinear::create());
 	}
 
-	// load test image
-	try {
-		mImage = gl::Texture::create(loadImage(loadAsset("help.png")),
-			gl::Texture2d::Format().loadTopDown().mipmap(true).minFilter(GL_LINEAR_MIPMAP_LINEAR));
-
-		mSrcArea = mImage->getBounds();
-
-		// adjust the content size of the warps
-		Warp::setSize(mWarps, mImage->getSize());
-	}
-	catch (const std::exception &e) {
-		console() << e.what() << std::endl;
-	}
 	// render fbo
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
+	mSrcArea1 = mRenderFbo->getBounds();
+	mSrcArea2 = mRenderFbo->getBounds();
 	iChromatic = 1.0f;
 }
 
@@ -140,32 +130,29 @@ void BatchassSkyApp::draw()
 	// clear the window and set the drawing color to white
 	gl::clear(Color::black());
 	renderSceneToFbo();
-	
+
 	gl::setMatricesWindow(toPixels(getWindowSize()));
 
 	//gl::draw(mRenderFbo->getColorTexture());
+	int i = 0;
+	for (auto &warp : mWarps) {
+		if (mUseBeginEnd) {
 
-		for (auto &warp : mWarps) {
-			if (mUseBeginEnd) {
-				// a) issue your draw commands between begin() and end() statements
-				warp->begin();
-
-				// in this demo, we want to draw a specific area of our image,
-				// but if you want to draw the whole image, you can simply use: gl::draw( mImage );
-				gl::draw(mImage, mSrcArea, warp->getBounds());
-
-				warp->end();
+			int w = mRenderFbo->getColorTexture()->getWidth();
+			int h = mRenderFbo->getColorTexture()->getHeight();
+			warp->draw(mRenderFbo->getColorTexture(), Area(0, 0, w, h), Rectf(200, 100, 200 + w / 2, 100 + h / 2));
+		}
+		else {
+			if (i == 0) {
+				warp->draw(mRenderFbo->getColorTexture(), mSrcArea1);
 			}
 			else {
-				// b) simply draw a texture on them (ideal for video)
-
-				// in this demo, we want to draw a specific area of our image,
-				// but if you want to draw the whole image, you can simply use: warp->draw( mImage );
-				warp->draw(mImage, mSrcArea);
+				warp->draw(mRenderFbo->getColorTexture(), mSrcArea2);
 			}
-			warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
-
 		}
+		//warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
+		i++;
+	}
 
 }
 
@@ -180,7 +167,7 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
-		iChromatic = event.getX()/100.0;
+		iChromatic = event.getX() / 100.0;
 
 	}
 }
@@ -243,27 +230,35 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 			Warp::enableEditMode(!Warp::isEditModeEnabled());
 			break;
 		case KeyEvent::KEY_a:
-			// toggle drawing a random region of the image
-			if (mSrcArea.getWidth() != mImage->getWidth() || mSrcArea.getHeight() != mImage->getHeight())
-				mSrcArea = mImage->getBounds();
+			// toggle split the image
+			if (mSrcArea1.getWidth() != mRenderFbo->getWidth() || mSrcArea1.getHeight() != mRenderFbo->getHeight()) {
+				mSrcArea1 = mRenderFbo->getBounds();
+				mSrcArea2 = mRenderFbo->getBounds();
+			}
 			else {
-				int x1 = Rand::randInt(0, mImage->getWidth() - 150);
-				int y1 = Rand::randInt(0, mImage->getHeight() - 150);
-				int x2 = Rand::randInt(x1 + 150, mImage->getWidth());
-				int y2 = Rand::randInt(y1 + 150, mImage->getHeight());
-				mSrcArea = Area(x1, y1, x2, y2);
+				int x1 = 0;
+				int y1 = 0;
+				int x2 = mRenderFbo->getWidth() / 2;
+				int y2 = mRenderFbo->getHeight();
+				mSrcArea1 = Area(x1, y1, x2, y2);
+				x1 = mRenderFbo->getWidth() / 2;
+				x2 = mRenderFbo->getWidth();
+				mSrcArea2 = Area(x1, y1, x2, y2);
 			}
 			break;
 		case KeyEvent::KEY_s:
 			// save animation
 			mVDAnimation->save();
 			break;
+		case KeyEvent::KEY_c:
+			mUseBeginEnd = !mUseBeginEnd;
+			break;
 		case KeyEvent::KEY_k:
 			// save keyframe
 			mVDAnimation->saveKeyframe(to_string(getElapsedSeconds()));
 			break;
 		case KeyEvent::KEY_SPACE:
-			
+
 			updateWindowTitle();
 			break;
 		}
@@ -283,8 +278,7 @@ void BatchassSkyApp::keyUp(KeyEvent event)
 
 void BatchassSkyApp::updateWindowTitle()
 {
-	//getWindow()->setTitle(to_string((int)getAverageFps()) + " fps Batchass Sky");
-	getWindow()->setTitle(to_string(iChromatic) + " fps Batchass Sky");
+	getWindow()->setTitle(to_string((int)getAverageFps()) + " fps Batchass Sky");
 }
 
 CINDER_APP(BatchassSkyApp, RendererGl(RendererGl::Options().msaa(8)), &BatchassSkyApp::prepare)
