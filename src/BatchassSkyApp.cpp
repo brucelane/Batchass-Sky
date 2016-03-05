@@ -110,24 +110,15 @@ void BatchassSkyApp::renderSceneToFbo()
 	// setup the viewport to match the dimensions of the FBO
 	gl::ScopedViewport scpVp(ivec2(0), mRenderFbo->getSize());
 	gl::color(Color::white());
-
-
-}
-void BatchassSkyApp::draw()
-{
-	// clear the window and set the drawing color to white
-	gl::clear(Color::black());
-	//renderSceneToFbo();
-
 	// setup basic camera
 	auto cam = CameraPersp(getWindowWidth(), getWindowHeight(), 60, 1, 1000).calcFraming(Sphere(vec3(0.0f), 1.25f));
 	gl::setMatrices(cam);
 	//gl::rotate(getElapsedSeconds() * 0.1f, vec3(0.123, 0.456, 0.789));
-	gl::rotate(getElapsedSeconds() * 0.1f + mVDSettings->maxVolume/100, vec3(0.123, 0.456, 0.789));
+	gl::rotate(getElapsedSeconds() * 0.1f + mVDSettings->maxVolume / 100, vec3(0.123, 0.456, 0.789));
 	gl::viewport(getWindowSize());
 
 	// update uniforms
-	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel + mVDSettings->maxVolume/10);
+	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel + mVDSettings->maxVolume / 10);
 	mBatch->getGlslProg()->uniform("uTessLevelOuter", mOuterLevel);
 	mBatch->getGlslProg()->uniform("iChromatic", iChromatic);
 
@@ -142,7 +133,19 @@ void BatchassSkyApp::draw()
 	else
 		glDrawArrays(GL_PATCHES, 0, mBatch->getVboMesh()->getNumIndices());
 
-		/*for (auto &warp : mWarps) {
+
+}
+void BatchassSkyApp::draw()
+{
+	// clear the window and set the drawing color to white
+	gl::clear(Color::black());
+	renderSceneToFbo();
+	
+	gl::setMatricesWindow(toPixels(getWindowSize()));
+
+	//gl::draw(mRenderFbo->getColorTexture());
+
+		for (auto &warp : mWarps) {
 			if (mUseBeginEnd) {
 				// a) issue your draw commands between begin() and end() statements
 				warp->begin();
@@ -162,7 +165,7 @@ void BatchassSkyApp::draw()
 			}
 			warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
 
-		}*/
+		}
 
 }
 
