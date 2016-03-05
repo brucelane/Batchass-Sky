@@ -72,8 +72,6 @@ void BatchassSkyApp::setup()
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
-	mSrcArea1 = mRenderFbo->getBounds();
-	mSrcArea2 = mRenderFbo->getBounds();
 	iChromatic = 1.0f;
 }
 
@@ -96,12 +94,12 @@ void BatchassSkyApp::renderSceneToFbo()
 	// on non-OpenGL ES platforms, you can just call mFbo->unbindFramebuffer() at the end of the function
 	// but this will restore the "screen" FBO on OpenGL ES, and does the right thing on both platforms
 	gl::ScopedFramebuffer fbScp(mRenderFbo);
-	gl::clear(Color::gray(0.3f), true);//mBlack
+	gl::clear(Color::gray(0.03f), true);//mBlack
 	// setup the viewport to match the dimensions of the FBO
 	gl::ScopedViewport scpVp(ivec2(0), mRenderFbo->getSize());
 	gl::color(Color::white());
 	// setup basic camera
-	auto cam = CameraPersp(getWindowWidth(), getWindowHeight(), 60, 1, 1000).calcFraming(Sphere(vec3(0.0f), 1.25f));
+	auto cam = CameraPersp(mVDSettings->mFboWidth - ((int)mVDSettings->maxVolume * 5), mVDSettings->mFboHeight, 60, 1, 1000).calcFraming(Sphere(vec3(0.0f), 1.25f));
 	gl::setMatrices(cam);
 	//gl::rotate(getElapsedSeconds() * 0.1f, vec3(0.123, 0.456, 0.789));
 	gl::rotate(getElapsedSeconds() * 0.1f + mVDSettings->maxVolume / 100, vec3(0.123, 0.456, 0.789));
@@ -122,8 +120,6 @@ void BatchassSkyApp::renderSceneToFbo()
 		glDrawElements(GL_PATCHES, mBatch->getVboMesh()->getNumIndices(), mBatch->getVboMesh()->getIndexDataType(), (GLvoid*)(0));
 	else
 		glDrawArrays(GL_PATCHES, 0, mBatch->getVboMesh()->getNumIndices());
-
-
 }
 void BatchassSkyApp::draw()
 {
@@ -143,11 +139,11 @@ void BatchassSkyApp::draw()
 			warp->draw(mRenderFbo->getColorTexture(), Area(0, 0, w, h), Rectf(200, 100, 200 + w / 2, 100 + h / 2));
 		}
 		else {
-			if (i == 0) {
-				warp->draw(mRenderFbo->getColorTexture(), mSrcArea1);
+			if (i%2 == 0) {
+				warp->draw(mRenderFbo->getColorTexture(), mVDUtils->getSrcAreaLeftOrTop());
 			}
 			else {
-				warp->draw(mRenderFbo->getColorTexture(), mSrcArea2);
+				warp->draw(mRenderFbo->getColorTexture(), mVDUtils->getSrcAreaRightOrBottom());
 			}
 		}
 		//warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
@@ -223,28 +219,24 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 			break;
 		case KeyEvent::KEY_v:
 			// toggle vertical sync
-			gl::enableVerticalSync(!gl::isVerticalSyncEnabled());
+			//gl::enableVerticalSync(!gl::isVerticalSyncEnabled());
+			mVDSettings->mSplitWarpV = !mVDSettings->mSplitWarpV;
+			mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+			break;
+		case KeyEvent::KEY_h:
+			mVDSettings->mSplitWarpH = !mVDSettings->mSplitWarpH;
+			mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+			break;
+		case KeyEvent::KEY_r:
+			// reset split the image
+			mVDSettings->mSplitWarpV = false;
+			mVDSettings->mSplitWarpH = false;
+			mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+			
 			break;
 		case KeyEvent::KEY_w:
 			// toggle warp edit mode
 			Warp::enableEditMode(!Warp::isEditModeEnabled());
-			break;
-		case KeyEvent::KEY_a:
-			// toggle split the image
-			if (mSrcArea1.getWidth() != mRenderFbo->getWidth() || mSrcArea1.getHeight() != mRenderFbo->getHeight()) {
-				mSrcArea1 = mRenderFbo->getBounds();
-				mSrcArea2 = mRenderFbo->getBounds();
-			}
-			else {
-				int x1 = 0;
-				int y1 = 0;
-				int x2 = mRenderFbo->getWidth() / 2;
-				int y2 = mRenderFbo->getHeight();
-				mSrcArea1 = Area(x1, y1, x2, y2);
-				x1 = mRenderFbo->getWidth() / 2;
-				x2 = mRenderFbo->getWidth();
-				mSrcArea2 = Area(x1, y1, x2, y2);
-			}
 			break;
 		case KeyEvent::KEY_s:
 			// save animation

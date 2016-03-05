@@ -78,9 +78,6 @@ private:
 
 	WarpList		mWarps;
 
-	Area			mSrcArea1;
-	Area			mSrcArea2;
-
 	gl::BatchRef	mBatch;
 	float			mInnerLevel, mOuterLevel;
 	// fbo
