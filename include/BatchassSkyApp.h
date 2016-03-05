@@ -34,6 +34,10 @@ along with Cinder-Warping.  If not, see <http://www.gnu.org/licenses/>.
 #include "VDAudio.h"
 // Animation
 #include "VDAnimation.h"
+// shaders
+#include "VDShaders.h"
+// fbo
+#include "VDFbo.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -71,6 +75,12 @@ private:
 	VDAudioRef		mVDAudio;
 	// Animation
 	VDAnimationRef	mVDAnimation;
+	// Shaders
+	VDShadersRef				mVDShaders;
+	// Fbos
+	vector<VDFboRef>			mVDFbos;
+	// shaders
+	gl::GlslProgRef				aShader;
 
 	bool			mUseBeginEnd;
 

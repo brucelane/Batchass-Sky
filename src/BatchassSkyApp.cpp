@@ -33,6 +33,10 @@ void BatchassSkyApp::setup()
 	mVDAudio->loadWaveFile(waveFile.string());
 	// Animation
 	mVDAnimation = VDAnimation::create(mVDSettings);
+	// Shaders
+	mVDShaders = VDShaders::create(mVDSettings);
+	// mix fbo at index 0
+	mVDFbos.push_back(VDFbo::create(mVDSettings, "mix", mVDSettings->mFboWidth, mVDSettings->mFboHeight));
 
 	// create a batch with our tesselation shader
 	auto format = gl::GlslProg::Format()
@@ -108,7 +112,6 @@ void BatchassSkyApp::renderSceneToFbo()
 	// update uniforms
 	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel + mVDSettings->maxVolume / 10);
 	mBatch->getGlslProg()->uniform("uTessLevelOuter", mOuterLevel);
-	mBatch->getGlslProg()->uniform("iChromatic", iChromatic);
 
 	// bypass gl::Batch::draw method so we can use GL_PATCHES
 	gl::ScopedVao scopedVao(mBatch->getVao().get());
@@ -127,8 +130,96 @@ void BatchassSkyApp::draw()
 	gl::clear(Color::black());
 	renderSceneToFbo();
 
-	gl::setMatricesWindow(toPixels(getWindowSize()));
+	/***********************************************
+	* mix 2 FBOs begin
+	* first render the 2 frags to fbos (done before)
+	* then use them as textures for the mix shader
+	*/
 
+	// draw using the mix shader
+	mVDFbos[mVDSettings->mMixFboIndex]->getFboRef()->bindFramebuffer();
+	//gl::setViewport(mVDFbos[mVDSettings->mMixFboIndex].fbo.getBounds());
+
+	// clear the FBO
+	gl::clear();
+	gl::setMatricesWindow(mVDSettings->mFboWidth, mVDSettings->mFboHeight);
+
+	aShader = mVDShaders->getMixShader();
+	aShader->bind();
+	aShader->uniform("iGlobalTime", mVDSettings->iGlobalTime);
+	//20140703 aShader->uniform("iResolution", vec3(mVDSettings->mRenderResoXY.x, mVDSettings->mRenderResoXY.y, 1.0));
+	aShader->uniform("iResolution", vec3(mVDSettings->mFboWidth, mVDSettings->mFboHeight, 1.0));
+	aShader->uniform("iChannelResolution", mVDSettings->iChannelResolution, 4);
+	aShader->uniform("iMouse", vec4(mVDSettings->mRenderPosXY.x, mVDSettings->mRenderPosXY.y, mVDSettings->iMouse.z, mVDSettings->iMouse.z));//iMouse =  Vec3i( event.getX(), mRenderHeight - event.getY(), 1 );
+	aShader->uniform("iChannel0", 0);
+	aShader->uniform("iChannel1", 1);
+	aShader->uniform("iAudio0", 0);
+	aShader->uniform("iFreq0", mVDSettings->iFreqs[0]);
+	aShader->uniform("iFreq1", mVDSettings->iFreqs[1]);
+	aShader->uniform("iFreq2", mVDSettings->iFreqs[2]);
+	aShader->uniform("iFreq3", mVDSettings->iFreqs[3]);
+	aShader->uniform("iChannelTime", mVDSettings->iChannelTime, 4);
+	aShader->uniform("iColor", vec3(mVDSettings->controlValues[1], mVDSettings->controlValues[2], mVDSettings->controlValues[3]));// mVDSettings->iColor);
+	aShader->uniform("iBackgroundColor", vec3(mVDSettings->controlValues[5], mVDSettings->controlValues[6], mVDSettings->controlValues[7]));// mVDSettings->iBackgroundColor);
+	aShader->uniform("iSteps", (int)mVDSettings->controlValues[20]);
+	aShader->uniform("iRatio", mVDSettings->controlValues[11]);//check if needed: +1;//mVDSettings->iRatio); 
+	aShader->uniform("width", 1);
+	aShader->uniform("height", 1);
+	aShader->uniform("iRenderXY", mVDSettings->mRenderXY);
+	aShader->uniform("iZoom", mVDSettings->controlValues[22]);
+	aShader->uniform("iAlpha", mVDSettings->controlValues[4]);
+	aShader->uniform("iBlendmode", mVDSettings->iBlendMode);
+	aShader->uniform("iChromatic", iChromatic);// mVDSettings->controlValues[10]);
+	aShader->uniform("iRotationSpeed", mVDSettings->controlValues[19]);
+	aShader->uniform("iCrossfade", mVDSettings->controlValues[18]);
+	aShader->uniform("iPixelate", mVDSettings->controlValues[15]);
+	aShader->uniform("iExposure", mVDSettings->controlValues[14]);
+	aShader->uniform("iDeltaTime", mVDAnimation->iDeltaTime);
+	aShader->uniform("iFade", (int)mVDSettings->iFade);
+	aShader->uniform("iToggle", (int)mVDSettings->controlValues[46]);
+	aShader->uniform("iLight", (int)mVDSettings->iLight);
+	aShader->uniform("iLightAuto", (int)mVDSettings->iLightAuto);
+	aShader->uniform("iGreyScale", (int)mVDSettings->iGreyScale);
+	aShader->uniform("iTransition", mVDSettings->iTransition);
+	aShader->uniform("iAnim", mVDSettings->iAnim.value());
+	aShader->uniform("iRepeat", (int)mVDSettings->iRepeat);
+	aShader->uniform("iVignette", (int)mVDSettings->controlValues[47]);
+	aShader->uniform("iInvert", (int)mVDSettings->controlValues[48]);
+	aShader->uniform("iDebug", (int)mVDSettings->iDebug);
+	aShader->uniform("iShowFps", (int)mVDSettings->iShowFps);
+	aShader->uniform("iFps", mVDSettings->iFps);
+	aShader->uniform("iTempoTime", mVDAnimation->iTempoTime);
+	aShader->uniform("iGlitch", (int)mVDSettings->controlValues[45]);
+	aShader->uniform("iTrixels", mVDSettings->controlValues[16]);
+	aShader->uniform("iGridSize", mVDSettings->controlValues[17]);
+	aShader->uniform("iBeat", mVDSettings->iBeat);
+	aShader->uniform("iSeed", mVDSettings->iSeed);
+	aShader->uniform("iRedMultiplier", mVDSettings->iRedMultiplier);
+	aShader->uniform("iGreenMultiplier", mVDSettings->iGreenMultiplier);
+	aShader->uniform("iBlueMultiplier", mVDSettings->iBlueMultiplier);
+	aShader->uniform("iFlipH", mVDFbos[mVDSettings->mMixFboIndex]->isFlipH());
+	aShader->uniform("iFlipV", mVDFbos[mVDSettings->mMixFboIndex]->isFlipV());
+	aShader->uniform("iParam1", mVDSettings->iParam1);
+	aShader->uniform("iParam2", mVDSettings->iParam2);
+	aShader->uniform("iXorY", mVDSettings->iXorY);
+	aShader->uniform("iBadTv", mVDSettings->iBadTv);
+
+	mRenderFbo->getColorTexture()->bind(0);
+	mRenderFbo->getColorTexture()->bind(1);
+	gl::drawSolidRect(Rectf(0, 0, mVDSettings->mFboWidth, mVDSettings->mFboHeight));
+	// stop drawing into the FBO
+	mVDFbos[mVDSettings->mMixFboIndex]->getFboRef()->unbindFramebuffer();
+	mRenderFbo->getColorTexture()->unbind();
+	mRenderFbo->getColorTexture()->unbind();
+
+	//aShader->unbind();
+	//sTextures[5] = mVDFbos[mVDSettings->mMixFboIndex]->getTexture();
+
+	//}
+	/***********************************************
+	* mix 2 FBOs end
+	*/
+	gl::setMatricesWindow(toPixels(getWindowSize()));
 	//gl::draw(mRenderFbo->getColorTexture());
 	int i = 0;
 	for (auto &warp : mWarps) {
@@ -140,10 +231,10 @@ void BatchassSkyApp::draw()
 		}
 		else {
 			if (i%2 == 0) {
-				warp->draw(mRenderFbo->getColorTexture(), mVDUtils->getSrcAreaLeftOrTop());
+				warp->draw(mVDFbos[mVDSettings->mMixFboIndex]->getTexture(), mVDUtils->getSrcAreaLeftOrTop());
 			}
 			else {
-				warp->draw(mRenderFbo->getColorTexture(), mVDUtils->getSrcAreaRightOrBottom());
+				warp->draw(mVDFbos[mVDSettings->mMixFboIndex]->getTexture(), mVDUtils->getSrcAreaRightOrBottom());
 			}
 		}
 		//warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
@@ -163,7 +254,7 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
-		iChromatic = event.getX() / 100.0;
+		iChromatic = event.getX() / 100.0f;
 
 	}
 }
