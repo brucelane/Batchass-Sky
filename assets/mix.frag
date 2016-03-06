@@ -731,17 +731,17 @@ void main(void)
 		float c = 1.;
 		if (iXorY)
 		{
-			c += iBadTv * sin(iGlobalTime * 2. + uv.y * 100. * iParam1);
-			c += iBadTv * sin(iGlobalTime * 1. + uv.y * 80.);
-			c += iBadTv * sin(iGlobalTime * 5. + uv.y * 900. * iParam2);
-			c += 1. * cos(iGlobalTime + uv.x);
-		}
-		else
-		{
 			c += iBadTv * sin(iGlobalTime * 2. + uv.x * 100. * iParam1);
 			c += iBadTv * sin(iGlobalTime * 1. + uv.x * 80.);
 			c += iBadTv * sin(iGlobalTime * 5. + uv.x * 900. * iParam2);
 			c += 1. * cos(iGlobalTime + uv.y);
+		}
+		else
+		{
+			c += iBadTv * sin(iGlobalTime * 2. + uv.y * 100. * iParam1);
+			c += iBadTv * sin(iGlobalTime * 1. + uv.y * 80.);
+			c += iBadTv * sin(iGlobalTime * 5. + uv.y * 900. * iParam2);
+			c += 1. * cos(iGlobalTime + uv.x);
 		}	
 	
 		//vignetting

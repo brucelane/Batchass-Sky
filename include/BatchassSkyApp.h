@@ -45,36 +45,38 @@ using namespace ph::warping;
 using namespace std;
 using namespace VideoDromm;
 
+void	resetBadTv();
+bool	iBadTvRunning;
 #define IM_ARRAYSIZE(_ARR)			((int)(sizeof(_ARR)/sizeof(*_ARR)))
 class BatchassSkyApp : public App {
 public:
-	static void prepare(Settings *settings);
+	static void					prepare(Settings *settings);
 
-	void setup() override;
-	void cleanup() override;
-	void update() override;
-	void draw() override;
+	void						setup() override;
+	void						cleanup() override;
+	void						update() override;
+	void						draw() override;
 
-	void resize() override;
+	void						resize() override;
 
-	void mouseMove(MouseEvent event) override;
-	void mouseDown(MouseEvent event) override;
-	void mouseDrag(MouseEvent event) override;
-	void mouseUp(MouseEvent event) override;
+	void						mouseMove(MouseEvent event) override;
+	void						mouseDown(MouseEvent event) override;
+	void						mouseDrag(MouseEvent event) override;
+	void						mouseUp(MouseEvent event) override;
 
-	void keyDown(KeyEvent event) override;
-	void keyUp(KeyEvent event) override;
+	void						keyDown(KeyEvent event) override;
+	void						keyUp(KeyEvent event) override;
 
-	void updateWindowTitle();
+	void						updateWindowTitle();
 private:
 	// Settings
-	VDSettingsRef	mVDSettings;
+	VDSettingsRef				mVDSettings;
 	// Utils
-	VDUtilsRef		mVDUtils;
+	VDUtilsRef					mVDUtils;
 	// Audio
-	VDAudioRef		mVDAudio;
+	VDAudioRef					mVDAudio;
 	// Animation
-	VDAnimationRef	mVDAnimation;
+	VDAnimationRef				mVDAnimation;
 	// Shaders
 	VDShadersRef				mVDShaders;
 	// Fbos
@@ -82,18 +84,21 @@ private:
 	// shaders
 	gl::GlslProgRef				aShader;
 
-	bool			mUseBeginEnd;
+	bool						mUseBeginEnd;
 
-	fs::path		mSettings;
+	fs::path					mSettings;
 
-	WarpList		mWarps;
-
-	gl::BatchRef	mBatch;
-	float			mInnerLevel, mOuterLevel;
+	WarpList					mWarps;
+	bool						firstDraw;
+	gl::BatchRef				mBatch;
+	float						mInnerLevel, mOuterLevel;
 	// fbo
-	void			renderSceneToFbo();
-	gl::FboRef		mRenderFbo;
+	void						renderSceneToFbo();
+	gl::FboRef					mRenderFbo;
+	// tempo 
+	float						bpm;
+	float						fpb;
 
-	float			iChromatic;
-
+	float						iChromatic;
+	float						iGlitch;
 };

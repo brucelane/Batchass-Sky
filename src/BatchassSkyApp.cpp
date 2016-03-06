@@ -13,11 +13,13 @@ https://github.com/simongeilfus/Cinder-Experiments
 
 void BatchassSkyApp::prepare(Settings *settings)
 {
-	settings->setWindowSize(1440, 900);
+	settings->setWindowSize(40, 10);
 }
 
 void BatchassSkyApp::setup()
 {
+	firstDraw = true;
+	iBadTvRunning = false;
 	// Settings
 	mVDSettings = VDSettings::create();
 	mVDSettings->mLiveCode = false;
@@ -25,12 +27,8 @@ void BatchassSkyApp::setup()
 	// Utils
 	mVDUtils = VDUtils::create(mVDSettings);
 	mVDUtils->getWindowsResolution();
-	setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
-	setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
 	// Audio
 	mVDAudio = VDAudio::create(mVDSettings);
-	fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
-	mVDAudio->loadWaveFile(waveFile.string());
 	// Animation
 	mVDAnimation = VDAnimation::create(mVDSettings);
 	// Shaders
@@ -76,7 +74,14 @@ void BatchassSkyApp::setup()
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
-	iChromatic = 1.0f;
+	fpb = 16.0f;
+	bpm = 180.0f;
+	float fps = bpm / 60.0f * fpb;
+	setFrameRate(fps);
+
+	iChromatic = 0.0f;
+	iGlitch = 0.0f;
+
 }
 
 void BatchassSkyApp::cleanup()
@@ -89,7 +94,19 @@ void BatchassSkyApp::cleanup()
 void BatchassSkyApp::update()
 {
 	mVDAudio->update();
+	mVDAnimation->update();
+	if (mVDAnimation->getBadTV(getElapsedFrames()) == 1) {
+		iBadTvRunning = true;
+		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 0.5f, EaseInCubic()).finishFn(resetBadTv);
+	}
+	/*if (!iBadTvRunning && mVDSettings->iBadTv > 0.0) {
+		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 1.0f, EaseInCubic()).finishFn(resetBadTv);
+	}*/
 	updateWindowTitle();
+}
+void resetBadTv()
+{
+	iBadTvRunning = false;
 }
 // Render the scene into the FBO
 void BatchassSkyApp::renderSceneToFbo()
@@ -103,7 +120,7 @@ void BatchassSkyApp::renderSceneToFbo()
 	gl::ScopedViewport scpVp(ivec2(0), mRenderFbo->getSize());
 	gl::color(Color::white());
 	// setup basic camera
-	auto cam = CameraPersp(mVDSettings->mFboWidth - ((int)mVDSettings->maxVolume * 5), mVDSettings->mFboHeight, 60, 1, 1000).calcFraming(Sphere(vec3(0.0f), 1.25f));
+	auto cam = CameraPersp(mVDSettings->mFboWidth + ((int)mVDSettings->maxVolume * 5), mVDSettings->mFboHeight, 60, 1, 1000).calcFraming(Sphere(vec3(0.0f), 1.25f));
 	gl::setMatrices(cam);
 	//gl::rotate(getElapsedSeconds() * 0.1f, vec3(0.123, 0.456, 0.789));
 	gl::rotate(getElapsedSeconds() * 0.1f + mVDSettings->maxVolume / 100, vec3(0.123, 0.456, 0.789));
@@ -126,9 +143,8 @@ void BatchassSkyApp::renderSceneToFbo()
 }
 void BatchassSkyApp::draw()
 {
-	// clear the window and set the drawing color to white
-	gl::clear(Color::black());
 	renderSceneToFbo();
+
 
 	/***********************************************
 	* mix 2 FBOs begin
@@ -189,7 +205,7 @@ void BatchassSkyApp::draw()
 	aShader->uniform("iShowFps", (int)mVDSettings->iShowFps);
 	aShader->uniform("iFps", mVDSettings->iFps);
 	aShader->uniform("iTempoTime", mVDAnimation->iTempoTime);
-	aShader->uniform("iGlitch", (int)mVDSettings->controlValues[45]);
+	aShader->uniform("iGlitch", (int)iGlitch);// mVDSettings->controlValues[45]);
 	aShader->uniform("iTrixels", mVDSettings->controlValues[16]);
 	aShader->uniform("iGridSize", mVDSettings->controlValues[17]);
 	aShader->uniform("iBeat", mVDSettings->iBeat);
@@ -219,6 +235,15 @@ void BatchassSkyApp::draw()
 	/***********************************************
 	* mix 2 FBOs end
 	*/
+	if (firstDraw) {
+		firstDraw = false;
+		fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
+		mVDAudio->loadWaveFile(waveFile.string());
+
+		setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
+		setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
+	}
+	gl::clear(Color::black());
 	gl::setMatricesWindow(toPixels(getWindowSize()));
 	//gl::draw(mRenderFbo->getColorTexture());
 	int i = 0;
@@ -264,6 +289,7 @@ void BatchassSkyApp::mouseDown(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseDown(mWarps, event)) {
 		// let your application perform its mouseDown handling here
+		iGlitch = 1.0f;
 	}
 }
 
@@ -338,7 +364,7 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 			break;
 		case KeyEvent::KEY_k:
 			// save keyframe
-			mVDAnimation->saveKeyframe(to_string(getElapsedSeconds()));
+			mVDAnimation->saveKeyframe(getElapsedFrames());
 			break;
 		case KeyEvent::KEY_SPACE:
 
@@ -361,7 +387,7 @@ void BatchassSkyApp::keyUp(KeyEvent event)
 
 void BatchassSkyApp::updateWindowTitle()
 {
-	getWindow()->setTitle(to_string((int)getAverageFps()) + " fps Batchass Sky");
+	getWindow()->setTitle(to_string(getElapsedFrames()) + " " + to_string((int)getAverageFps()) + " fps Batchass Sky");
 }
 
 CINDER_APP(BatchassSkyApp, RendererGl(RendererGl::Options().msaa(8)), &BatchassSkyApp::prepare)

@@ -338,5 +338,8 @@
     <None Include="..\assets\shader.vert">
       <Filter>assets</Filter>
     </None>
+    <None Include="..\assets\mix.frag">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
 </Project>

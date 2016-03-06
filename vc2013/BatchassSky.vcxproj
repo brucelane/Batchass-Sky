@@ -119,6 +119,7 @@
     <Xml Include="Debug\VDSettings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\assets\mix.frag" />
     <None Include="..\assets\shader.cont" />
     <None Include="..\assets\shader.eval" />
     <None Include="..\assets\shader.frag" />
