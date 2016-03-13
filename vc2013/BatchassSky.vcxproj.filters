@@ -94,6 +94,9 @@
     <Filter Include="assets">
       <UniqueIdentifier>{96457b48-6769-4c86-ab73-a315386baf54}</UniqueIdentifier>
     </Filter>
+    <Filter Include="release">
+      <UniqueIdentifier>{406a98ed-0630-4234-acee-5a541d69cf92}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\BatchassSkyApp.cpp">
@@ -321,6 +324,9 @@
     <Xml Include="..\assets\warps.xml">
       <Filter>assets</Filter>
     </Xml>
+    <Xml Include="Release\VDSettings.xml">
+      <Filter>release</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\assets\shader.cont">
@@ -342,6 +348,9 @@
       <Filter>assets</Filter>
     </None>
     <None Include="..\assets\animation.json">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\live_params.json">
       <Filter>assets</Filter>
     </None>
   </ItemGroup>

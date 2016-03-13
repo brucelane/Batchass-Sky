@@ -95,8 +95,10 @@ void BatchassSkyApp::update()
 {
 	mVDAudio->update();
 	mVDAnimation->update();
+	CI_LOG_V(mVDAnimation->getBadTV(getElapsedFrames()));
 	if (mVDAnimation->getBadTV(getElapsedFrames()) == 1) {
 		iBadTvRunning = true;
+		// duration = 0.5
 		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 0.5f, EaseInCubic()).finishFn(resetBadTv);
 	}
 	/*if (!iBadTvRunning && mVDSettings->iBadTv > 0.0) {
@@ -237,11 +239,11 @@ void BatchassSkyApp::draw()
 	*/
 	if (firstDraw) {
 		firstDraw = false;
+		setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
+		setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
 		fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
 		mVDAudio->loadWaveFile(waveFile.string());
 
-		setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
-		setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
 	}
 	gl::clear(Color::black());
 	gl::setMatricesWindow(toPixels(getWindowSize()));
@@ -280,7 +282,6 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
 		iChromatic = event.getX() / 100.0f;
-
 	}
 }
 
@@ -314,74 +315,65 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 	// pass this key event to the warp editor first
 	if (!Warp::handleKeyDown(mWarps, event)) {
 		// warp editor did not handle the key, so handle it here
-		switch (event.getCode()) {
+		if (!mVDAnimation->handleKeyDown(event)) {
+			// Animation did not handle the key, so handle it here
+			switch (event.getCode()) {
 
-		case KeyEvent::KEY_LEFT: mInnerLevel--; break;
-		case KeyEvent::KEY_RIGHT: mInnerLevel++; break;
-		case KeyEvent::KEY_DOWN: mOuterLevel--; break;
-		case KeyEvent::KEY_UP: mOuterLevel++; break;
-		case KeyEvent::KEY_1: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Cube())); break;
-		case KeyEvent::KEY_2: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosahedron())); break;
-		case KeyEvent::KEY_3: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Sphere())); break;
-		case KeyEvent::KEY_4: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosphere())); break;
+			case KeyEvent::KEY_LEFT: mInnerLevel--; break;
+			case KeyEvent::KEY_RIGHT: mInnerLevel++; break;
+			case KeyEvent::KEY_DOWN: mOuterLevel--; break;
+			case KeyEvent::KEY_UP: mOuterLevel++; break;
+			case KeyEvent::KEY_1: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Cube())); break;
+			case KeyEvent::KEY_2: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosahedron())); break;
+			case KeyEvent::KEY_3: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Sphere())); break;
+			case KeyEvent::KEY_4: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosphere())); break;
 
 
-		case KeyEvent::KEY_ESCAPE:
-			// quit the application
-			quit();
-			break;
-		case KeyEvent::KEY_f:
-			// toggle full screen
-			setFullScreen(!isFullScreen());
-			break;
-		case KeyEvent::KEY_v:
-			// toggle vertical sync
-			//gl::enableVerticalSync(!gl::isVerticalSyncEnabled());
-			mVDSettings->mSplitWarpV = !mVDSettings->mSplitWarpV;
-			mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
-			break;
-		case KeyEvent::KEY_h:
-			mVDSettings->mSplitWarpH = !mVDSettings->mSplitWarpH;
-			mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
-			break;
-		case KeyEvent::KEY_r:
-			// reset split the image
-			mVDSettings->mSplitWarpV = false;
-			mVDSettings->mSplitWarpH = false;
-			mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
-			
-			break;
-		case KeyEvent::KEY_w:
-			// toggle warp edit mode
-			Warp::enableEditMode(!Warp::isEditModeEnabled());
-			break;
-		case KeyEvent::KEY_s:
-			// save animation
-			mVDAnimation->save();
-			break;
-		case KeyEvent::KEY_c:
-			mUseBeginEnd = !mUseBeginEnd;
-			break;
-		case KeyEvent::KEY_k:
-			// save keyframe
-			mVDAnimation->saveKeyframe(getElapsedFrames());
-			break;
-		case KeyEvent::KEY_SPACE:
-
-			updateWindowTitle();
-			break;
+			case KeyEvent::KEY_ESCAPE:
+				// quit the application
+				quit();
+				break;
+			case KeyEvent::KEY_f:
+				// toggle full screen
+				setFullScreen(!isFullScreen());
+				break;
+			case KeyEvent::KEY_v:
+				// toggle vertical sync
+				//gl::enableVerticalSync(!gl::isVerticalSyncEnabled());
+				mVDSettings->mSplitWarpV = !mVDSettings->mSplitWarpV;
+				mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+				break;
+			case KeyEvent::KEY_h:
+				mVDSettings->mSplitWarpH = !mVDSettings->mSplitWarpH;
+				mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+				break;
+			case KeyEvent::KEY_r:
+				// reset split the image
+				mVDSettings->mSplitWarpV = false;
+				mVDSettings->mSplitWarpH = false;
+				mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+				break;
+			case KeyEvent::KEY_w:
+				// toggle warp edit mode
+				Warp::enableEditMode(!Warp::isEditModeEnabled());
+				break;
+			case KeyEvent::KEY_c:
+				mUseBeginEnd = !mUseBeginEnd;
+				break;
+			}
+			mInnerLevel = math<float>::max(mInnerLevel, 1.0f);
+			mOuterLevel = math<float>::max(mOuterLevel, 1.0f);
 		}
-		mInnerLevel = math<float>::max(mInnerLevel, 1.0f);
-		mOuterLevel = math<float>::max(mOuterLevel, 1.0f);
 	}
-
 }
 
 void BatchassSkyApp::keyUp(KeyEvent event)
 {
 	// pass this key event to the warp editor first
 	if (!Warp::handleKeyUp(mWarps, event)) {
-		// let your application perform its keyUp handling here
+		if (!mVDAnimation->handleKeyUp(event)) {
+			// Animation did not handle the key, so handle it here
+		}
 	}
 }
 
