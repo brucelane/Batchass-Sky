@@ -146,7 +146,6 @@ void BatchassSkyApp::draw()
 {
 	renderSceneToFbo();
 
-
 	/***********************************************
 	* mix 2 FBOs begin
 	* first render the 2 frags to fbos (done before)
@@ -242,7 +241,7 @@ void BatchassSkyApp::draw()
 			firstDraw = false;
 			setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
 			setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
-			fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
+			fs::path waveFile = getAssetPath("") / mVDSettings->mAssetsPath / "batchass-sky.wav";
 			mVDAudio->loadWaveFile(waveFile.string());
 		}
 	}
