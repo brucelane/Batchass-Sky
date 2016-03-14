@@ -28,6 +28,8 @@ along with Cinder-Warping.  If not, see <http://www.gnu.org/licenses/>.
 #include "Warp.h"
 // Settings
 #include "VDSettings.h"
+// Session
+#include "VDSession.h"
 // Utils
 #include "VDUtils.h"
 // Audio
@@ -71,6 +73,8 @@ public:
 private:
 	// Settings
 	VDSettingsRef				mVDSettings;
+	// Session
+	VDSessionRef				mVDSession;
 	// Utils
 	VDUtilsRef					mVDUtils;
 	// Audio
@@ -95,10 +99,8 @@ private:
 	// fbo
 	void						renderSceneToFbo();
 	gl::FboRef					mRenderFbo;
-	// tempo (TODO read from anim.json)
-	//float						bpm;
-	//float						fpb;
 
+	// uniforms
 	float						iChromatic;
 	int							iGlitch;
 };

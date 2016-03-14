@@ -9,8 +9,6 @@ Cinder experimented from Simon Geilfus
 https://github.com/simongeilfus/Cinder-Experiments
 */
 
-
-
 void BatchassSkyApp::prepare(Settings *settings)
 {
 	settings->setWindowSize(40, 10);
@@ -24,13 +22,14 @@ void BatchassSkyApp::setup()
 	mVDSettings = VDSettings::create();
 	mVDSettings->mLiveCode = false;
 	mVDSettings->mRenderThumbs = false;
+	mVDSession = VDSession::create(mVDSettings);
 	// Utils
 	mVDUtils = VDUtils::create(mVDSettings);
 	mVDUtils->getWindowsResolution();
 	// Audio
 	mVDAudio = VDAudio::create(mVDSettings);
 	// Animation
-	mVDAnimation = VDAnimation::create(mVDSettings);
+	mVDAnimation = VDAnimation::create(mVDSettings, mVDSession);
 	// Shaders
 	mVDShaders = VDShaders::create(mVDSettings);
 	// mix fbo at index 0
@@ -74,10 +73,8 @@ void BatchassSkyApp::setup()
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
-	fpb = 16.0f;
-	bpm = 180.0f;
-	float fps = bpm / 60.0f * fpb;
-	setFrameRate(fps);
+	// Sky bpm = 180.0f;
+	setFrameRate(mVDSession->getTargetFps());
 
 	iChromatic = 0.0f;
 	iGlitch = 0;
@@ -89,6 +86,7 @@ void BatchassSkyApp::cleanup()
 	// save warp settings
 	Warp::writeSettings(mWarps, writeFile(mSettings));
 	mVDSettings->save();
+	mVDSession->save();
 }
 
 void BatchassSkyApp::update()
