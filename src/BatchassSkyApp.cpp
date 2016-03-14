@@ -44,7 +44,7 @@ void BatchassSkyApp::setup()
 		.tessellationCtrl(loadAsset("shader.cont"))
 		.tessellationEval(loadAsset("shader.eval"));
 	auto shader = gl::GlslProg::create(format);
-	mBatch = gl::Batch::create(geom::Icosahedron(), shader);
+	mBatch = gl::Batch::create(geom::TorusKnot(), shader);
 
 	mInnerLevel = 1.0f;
 	mOuterLevel = 1.0f;
@@ -80,7 +80,7 @@ void BatchassSkyApp::setup()
 	setFrameRate(fps);
 
 	iChromatic = 0.0f;
-	iGlitch = 0.0f;
+	iGlitch = 0;
 
 }
 
@@ -95,11 +95,10 @@ void BatchassSkyApp::update()
 {
 	mVDAudio->update();
 	mVDAnimation->update();
-	CI_LOG_V(mVDAnimation->getBadTV(getElapsedFrames()));
 	if (mVDAnimation->getBadTV(getElapsedFrames()) == 1) {
 		iBadTvRunning = true;
-		// duration = 0.5
-		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 0.5f, EaseInCubic()).finishFn(resetBadTv);
+		// duration = 0.2
+		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 0.2f, EaseInCubic()).finishFn(resetBadTv);
 	}
 	/*if (!iBadTvRunning && mVDSettings->iBadTv > 0.0) {
 		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 1.0f, EaseInCubic()).finishFn(resetBadTv);
@@ -207,7 +206,7 @@ void BatchassSkyApp::draw()
 	aShader->uniform("iShowFps", (int)mVDSettings->iShowFps);
 	aShader->uniform("iFps", mVDSettings->iFps);
 	aShader->uniform("iTempoTime", mVDAnimation->iTempoTime);
-	aShader->uniform("iGlitch", (int)iGlitch);// mVDSettings->controlValues[45]);
+	aShader->uniform("iGlitch", iGlitch);// mVDSettings->controlValues[45]);
 	aShader->uniform("iTrixels", mVDSettings->controlValues[16]);
 	aShader->uniform("iGridSize", mVDSettings->controlValues[17]);
 	aShader->uniform("iBeat", mVDSettings->iBeat);
@@ -238,12 +237,14 @@ void BatchassSkyApp::draw()
 	* mix 2 FBOs end
 	*/
 	if (firstDraw) {
-		firstDraw = false;
-		setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
-		setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
-		fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
-		mVDAudio->loadWaveFile(waveFile.string());
+		if (getElapsedFrames() > 10) {
 
+			firstDraw = false;
+			setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
+			setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
+			fs::path waveFile = getAssetPath("") / "batchass-sky.wav";
+			mVDAudio->loadWaveFile(waveFile.string());
+		}
 	}
 	gl::clear(Color::black());
 	gl::setMatricesWindow(toPixels(getWindowSize()));
@@ -290,7 +291,7 @@ void BatchassSkyApp::mouseDown(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseDown(mWarps, event)) {
 		// let your application perform its mouseDown handling here
-		iGlitch = 1.0f;
+		iGlitch = 1;
 	}
 }
 
@@ -307,6 +308,7 @@ void BatchassSkyApp::mouseUp(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseUp(mWarps, event)) {
 		// let your application perform its mouseUp handling here
+		iGlitch = 0;
 	}
 }
 
@@ -327,6 +329,9 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 			case KeyEvent::KEY_2: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosahedron())); break;
 			case KeyEvent::KEY_3: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Sphere())); break;
 			case KeyEvent::KEY_4: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosphere())); break;
+			case KeyEvent::KEY_5: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Cylinder())); break;
+			case KeyEvent::KEY_6: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Torus())); break;
+			case KeyEvent::KEY_7: mBatch->replaceVboMesh(gl::VboMesh::create(geom::TorusKnot())); break;
 
 
 			case KeyEvent::KEY_ESCAPE:

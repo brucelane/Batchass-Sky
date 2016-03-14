@@ -50,7 +50,7 @@ uniform float       iBlueMultiplier;		// blue multiplier
 uniform float       iParam1;				// slitscan (or other) Param1
 uniform float       iParam2;				// slitscan (or other) Param2 
 uniform bool        iXorY;					// slitscan (or other) effect on x or y
-uniform float       iBadTv;					// badtv if > 0.
+uniform float       iBadTv;					// badtv if > 0.01
 
 const 	float 		  PI = 3.14159265;
 // uniforms end
@@ -726,7 +726,7 @@ void main(void)
 		col = mix( col, vec3( iBackgroundColor ), dot( p, p )*iRotationSpeed );
 	}
 	// badtv
-	if (iBadTv > 0.0)
+	if (iBadTv > 0.01)
 	{
 		float c = 1.;
 		if (iXorY)

@@ -95,10 +95,10 @@ private:
 	// fbo
 	void						renderSceneToFbo();
 	gl::FboRef					mRenderFbo;
-	// tempo 
-	float						bpm;
-	float						fpb;
+	// tempo (TODO read from anim.json)
+	//float						bpm;
+	//float						fpb;
 
 	float						iChromatic;
-	float						iGlitch;
+	int							iGlitch;
 };
