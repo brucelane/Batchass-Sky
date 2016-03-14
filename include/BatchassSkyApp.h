@@ -99,8 +99,4 @@ private:
 	// fbo
 	void						renderSceneToFbo();
 	gl::FboRef					mRenderFbo;
-
-	// uniforms
-	float						iChromatic;
-	int							iGlitch;
 };

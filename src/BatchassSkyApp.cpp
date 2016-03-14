@@ -76,9 +76,6 @@ void BatchassSkyApp::setup()
 	// Sky bpm = 180.0f;
 	setFrameRate(mVDSession->getTargetFps());
 
-	iChromatic = 0.0f;
-	iGlitch = 0;
-
 }
 
 void BatchassSkyApp::cleanup()
@@ -183,7 +180,7 @@ void BatchassSkyApp::draw()
 	aShader->uniform("iZoom", mVDSettings->controlValues[22]);
 	aShader->uniform("iAlpha", mVDSettings->controlValues[4]);
 	aShader->uniform("iBlendmode", mVDSettings->iBlendMode);
-	aShader->uniform("iChromatic", iChromatic);// mVDSettings->controlValues[10]);
+	aShader->uniform("iChromatic", mVDSettings->controlValues[10]);
 	aShader->uniform("iRotationSpeed", mVDSettings->controlValues[19]);
 	aShader->uniform("iCrossfade", mVDSettings->controlValues[18]);
 	aShader->uniform("iPixelate", mVDSettings->controlValues[15]);
@@ -203,7 +200,7 @@ void BatchassSkyApp::draw()
 	aShader->uniform("iShowFps", (int)mVDSettings->iShowFps);
 	aShader->uniform("iFps", mVDSettings->iFps);
 	aShader->uniform("iTempoTime", mVDAnimation->iTempoTime);
-	aShader->uniform("iGlitch", iGlitch);// mVDSettings->controlValues[45]);
+	aShader->uniform("iGlitch", (int)mVDSettings->controlValues[45]);
 	aShader->uniform("iTrixels", mVDSettings->controlValues[16]);
 	aShader->uniform("iGridSize", mVDSettings->controlValues[17]);
 	aShader->uniform("iBeat", mVDSettings->iBeat);
@@ -279,7 +276,7 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
-		iChromatic = event.getX() / 100.0f;
+		mVDSettings->controlValues[10] = event.getX() / mVDSettings->mRenderWidth;
 	}
 }
 
@@ -288,7 +285,7 @@ void BatchassSkyApp::mouseDown(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseDown(mWarps, event)) {
 		// let your application perform its mouseDown handling here
-		iGlitch = 1;
+		mVDSettings->controlValues[45] = 1.0f;
 	}
 }
 
@@ -305,7 +302,7 @@ void BatchassSkyApp::mouseUp(MouseEvent event)
 	// pass this mouse event to the warp editor first
 	if (!Warp::handleMouseUp(mWarps, event)) {
 		// let your application perform its mouseUp handling here
-		iGlitch = 0;
+		mVDSettings->controlValues[45] = 0.0f;
 	}
 }
 
