@@ -47,8 +47,7 @@ using namespace ph::warping;
 using namespace std;
 using namespace VideoDromm;
 
-void	resetBadTv();
-bool	iBadTvRunning;
+
 #define IM_ARRAYSIZE(_ARR)			((int)(sizeof(_ARR)/sizeof(*_ARR)))
 class BatchassSkyApp : public App {
 public:

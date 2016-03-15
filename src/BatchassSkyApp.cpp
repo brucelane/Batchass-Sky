@@ -17,7 +17,6 @@ void BatchassSkyApp::prepare(Settings *settings)
 void BatchassSkyApp::setup()
 {
 	firstDraw = true;
-	iBadTvRunning = false;
 	// Settings
 	mVDSettings = VDSettings::create();
 	mVDSettings->mLiveCode = false;
@@ -90,20 +89,11 @@ void BatchassSkyApp::update()
 {
 	mVDAudio->update();
 	mVDAnimation->update();
-	if (mVDAnimation->getBadTV(getElapsedFrames()) == 1) {
-		iBadTvRunning = true;
-		// duration = 0.2
-		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 0.2f, EaseInCubic()).finishFn(resetBadTv);
-	}
-	/*if (!iBadTvRunning && mVDSettings->iBadTv > 0.0) {
-		timeline().apply(&mVDSettings->iBadTv, 60.0f, 0.0f, 1.0f, EaseInCubic()).finishFn(resetBadTv);
-	}*/
+
+
 	updateWindowTitle();
 }
-void resetBadTv()
-{
-	iBadTvRunning = false;
-}
+
 // Render the scene into the FBO
 void BatchassSkyApp::renderSceneToFbo()
 {
@@ -277,6 +267,7 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
 		mVDSettings->controlValues[10] = event.getX() / mVDSettings->mRenderWidth;
+		mVDUtils->moveX1SrcAreaLeftOrTop(event.getX());
 	}
 }
 
