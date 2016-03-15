@@ -16,7 +16,7 @@ void BatchassSkyApp::prepare(Settings *settings)
 
 void BatchassSkyApp::setup()
 {
-	mWaveDelay = true;
+	mWaveDelay = mFadeInDelay = true;
 	// Settings
 	mVDSettings = VDSettings::create();
 	mVDSettings->mLiveCode = false;
@@ -168,7 +168,7 @@ void BatchassSkyApp::draw()
 	aShader->uniform("height", 1);
 	aShader->uniform("iRenderXY", mVDSettings->mRenderXY);
 	aShader->uniform("iZoom", mVDSettings->controlValues[22]);
-	aShader->uniform("iAlpha", mVDSettings->controlValues[4]);
+	aShader->uniform("iAlpha", mVDSettings->controlValues[4] * mVDSettings->iAlpha);
 	aShader->uniform("iBlendmode", mVDSettings->iBlendMode);
 	aShader->uniform("iChromatic", mVDSettings->controlValues[10]);
 	aShader->uniform("iRotationSpeed", mVDSettings->controlValues[19]);
@@ -220,6 +220,14 @@ void BatchassSkyApp::draw()
 	/***********************************************
 	* mix 2 FBOs end
 	*/
+	if (mFadeInDelay) {
+		if (getElapsedFrames() > mVDSession->getFadeInDelay()) {
+			mFadeInDelay = false;
+			setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
+			setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
+			timeline().apply(&mVDSettings->iAlpha, 0.0f, 1.0f, 1.5f, EaseInCubic());
+		}
+	}
 	if (mWaveDelay) {
 		if (getElapsedFrames() > mVDSession->getWavePlaybackDelay()) {
 
