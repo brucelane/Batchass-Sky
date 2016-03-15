@@ -120,8 +120,6 @@
     <Xml Include="Release\VDSettings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\assets\animation.json" />
-    <None Include="..\assets\live_params.json" />
     <None Include="..\assets\mix.frag" />
     <None Include="..\assets\shader.cont" />
     <None Include="..\assets\shader.eval" />

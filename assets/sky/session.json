@@ -1,5 +1,11 @@
 {
+   "assets" : {
+      "wavefile" : "batchass-sky.wav",
+      "waveplaybackdelay" : 10,
+      "moviefile" : "none.mov",
+      "movieplaybackdelay" : 10
+   },
    "settings" : {
-      "bpm" : "180"
+      "bpm" : 180
    }
 }

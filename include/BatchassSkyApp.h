@@ -92,7 +92,8 @@ private:
 	fs::path					mSettings;
 
 	WarpList					mWarps;
-	bool						firstDraw;
+	bool						mWaveDelay;
+
 	gl::BatchRef				mBatch;
 	float						mInnerLevel, mOuterLevel;
 	// fbo
