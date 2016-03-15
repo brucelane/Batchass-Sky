@@ -267,7 +267,8 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
 		mVDSettings->controlValues[10] = event.getX() / mVDSettings->mRenderWidth;
-		mVDUtils->moveX1SrcAreaLeftOrTop(event.getX());
+		mVDUtils->moveX1LeftOrTop(event.getX());
+		mVDUtils->moveY1LeftOrTop(event.getY());
 	}
 }
 
