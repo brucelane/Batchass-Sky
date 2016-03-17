@@ -94,6 +94,8 @@ private:
 	WarpList					mWarps;
 	bool						mWaveDelay;
 	bool						mFadeInDelay;
+	bool						mFadeOutDelay;
+
 	gl::BatchRef				mBatch;
 	float						mInnerLevel, mOuterLevel;
 	// fbo

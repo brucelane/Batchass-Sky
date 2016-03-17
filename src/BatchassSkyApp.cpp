@@ -16,7 +16,7 @@ void BatchassSkyApp::prepare(Settings *settings)
 
 void BatchassSkyApp::setup()
 {
-	mWaveDelay = mFadeInDelay = true;
+	mWaveDelay = mFadeInDelay = mFadeOutDelay = true;
 	// Settings
 	mVDSettings = VDSettings::create();
 	mVDSettings->mLiveCode = false;
@@ -57,7 +57,7 @@ void BatchassSkyApp::setup()
 	disableFrameRate();
 
 	// initialize warps
-	mSettings = getAssetPath("") / "warps.xml";
+	mSettings = getAssetPath("") / mVDSettings->mAssetsPath / "warps.xml";
 	if (fs::exists(mSettings)) {
 		// load warp settings from file if one exists
 		mWarps = Warp::readSettings(loadFile(mSettings));
@@ -67,6 +67,7 @@ void BatchassSkyApp::setup()
 		mWarps.push_back(WarpPerspectiveBilinear::create());
 		mWarps.push_back(WarpPerspectiveBilinear::create());
 	}
+		//mWarps.push_back(WarpPerspectiveBilinear::create());
 
 	// render fbo
 	gl::Fbo::Format fboFormat;
@@ -238,6 +239,12 @@ void BatchassSkyApp::draw()
 			mVDAudio->loadWaveFile(waveFile.string());
 		}
 	}
+	if (mFadeOutDelay) {
+		if (getElapsedFrames() > mVDSession->getEndFrame()) {
+			mFadeOutDelay = false;
+			timeline().apply(&mVDSettings->iAlpha, 1.0f, 0.0f, 2.0f, EaseInCubic());
+		}
+	}
 	gl::clear(Color::black());
 	gl::setMatricesWindow(toPixels(getWindowSize()));
 	//gl::draw(mRenderFbo->getColorTexture());
@@ -275,8 +282,8 @@ void BatchassSkyApp::mouseMove(MouseEvent event)
 	if (!Warp::handleMouseMove(mWarps, event)) {
 		// let your application perform its mouseMove handling here
 		mVDSettings->controlValues[10] = event.getX() / mVDSettings->mRenderWidth;
-		mVDUtils->moveX1LeftOrTop(event.getX());
-		mVDUtils->moveY1LeftOrTop(event.getY());
+		//mVDUtils->moveX1LeftOrTop(event.getX());
+		//mVDUtils->moveY1LeftOrTop(event.getY());
 	}
 }
 
@@ -308,6 +315,7 @@ void BatchassSkyApp::mouseUp(MouseEvent event)
 
 void BatchassSkyApp::keyDown(KeyEvent event)
 {
+	string fileName;
 	// pass this key event to the warp editor first
 	if (!Warp::handleKeyDown(mWarps, event)) {
 		// warp editor did not handle the key, so handle it here
@@ -352,13 +360,22 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 				mVDSettings->mSplitWarpH = false;
 				mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
 				break;
+			/*case KeyEvent::KEY_c:
+				mWarps.push_back(WarpPerspectiveBilinear::create());
+				mWarps[mWarps.size() - 1]->setWidth(100);
+				mWarps[mWarps.size() - 1]->setHeight(100);*/
+				
+			case KeyEvent::KEY_a:
+				fileName = "warps" + toString(getElapsedFrames()) + ".xml";
+				mSettings = getAssetPath("") / mVDSettings->mAssetsPath / fileName;
+				Warp::writeSettings(mWarps, writeFile(mSettings));
+				mSettings = getAssetPath("") / mVDSettings->mAssetsPath / "warps.xml";
+				break;
 			case KeyEvent::KEY_w:
 				// toggle warp edit mode
 				Warp::enableEditMode(!Warp::isEditModeEnabled());
 				break;
-			case KeyEvent::KEY_c:
-				mUseBeginEnd = !mUseBeginEnd;
-				break;
+
 			}
 			mInnerLevel = math<float>::max(mInnerLevel, 1.0f);
 			mOuterLevel = math<float>::max(mOuterLevel, 1.0f);

@@ -1,11 +1,14 @@
 {
    "assets" : {
-      "wavefile" : "batchass-sky.wav",
-      "waveplaybackdelay" : 10,
       "moviefile" : "none.mov",
-      "movieplaybackdelay" : 10
+      "movieplaybackdelay" : 10,
+      "wavefile" : "batchass-sky.wav",
+      "waveplaybackdelay" : 10
    },
    "settings" : {
-      "bpm" : 180
+      "bpm" : 180,
+      "endframe" : 10960,
+      "fadeindelay" : 15,
+      "fadeoutdelay" : 15
    }
 }
