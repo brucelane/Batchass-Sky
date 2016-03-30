@@ -73,6 +73,15 @@ void BatchassSkyApp::setup()
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
+	// mouse cursor
+	if (mVDSettings->mCursorVisible)
+	{
+		hideCursor();
+	}
+	else
+	{
+		showCursor();
+	}
 	// Sky bpm = 180.0f;
 	setFrameRate(mVDSession->getTargetFps());
 
