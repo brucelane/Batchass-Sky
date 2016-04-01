@@ -39,7 +39,7 @@ along with Cinder-Warping.  If not, see <http://www.gnu.org/licenses/>.
 // shaders
 #include "VDShaders.h"
 // fbo
-#include "VDFbo.h"
+//#include "VDFbo.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -83,7 +83,7 @@ private:
 	// Shaders
 	VDShadersRef				mVDShaders;
 	// Fbos
-	vector<VDFboRef>			mVDFbos;
+	//vector<VDFboRef>			mVDFbos;
 	// shaders
 	gl::GlslProgRef				aShader;
 
@@ -101,4 +101,5 @@ private:
 	// fbo
 	void						renderSceneToFbo();
 	gl::FboRef					mRenderFbo;
+	gl::FboRef					mFbo;
 };

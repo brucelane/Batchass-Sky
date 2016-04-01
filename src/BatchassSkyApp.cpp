@@ -31,8 +31,6 @@ void BatchassSkyApp::setup()
 	mVDAnimation = VDAnimation::create(mVDSettings, mVDSession);
 	// Shaders
 	mVDShaders = VDShaders::create(mVDSettings);
-	// mix fbo at index 0
-	mVDFbos.push_back(VDFbo::create(mVDSettings, "mix", mVDSettings->mFboWidth, mVDSettings->mFboHeight));
 
 	// create a batch with our tesselation shader
 	auto format = gl::GlslProg::Format()
@@ -73,6 +71,7 @@ void BatchassSkyApp::setup()
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
+	mFbo = gl::Fbo::create(mVDSettings->mFboWidth, mVDSettings->mFboHeight, fboFormat.colorTexture());
 	// mouse cursor
 	if (mVDSettings->mCursorVisible)
 	{
@@ -148,7 +147,7 @@ void BatchassSkyApp::draw()
 	*/
 
 	// draw using the mix shader
-	mVDFbos[mVDSettings->mMixFboIndex]->getFboRef()->bindFramebuffer();
+	mFbo->bindFramebuffer();
 	//gl::setViewport(mVDFbos[mVDSettings->mMixFboIndex].fbo.getBounds());
 
 	// clear the FBO
@@ -208,8 +207,8 @@ void BatchassSkyApp::draw()
 	aShader->uniform("iRedMultiplier", mVDSettings->iRedMultiplier);
 	aShader->uniform("iGreenMultiplier", mVDSettings->iGreenMultiplier);
 	aShader->uniform("iBlueMultiplier", mVDSettings->iBlueMultiplier);
-	aShader->uniform("iFlipH", mVDFbos[mVDSettings->mMixFboIndex]->isFlipH());
-	aShader->uniform("iFlipV", mVDFbos[mVDSettings->mMixFboIndex]->isFlipV());
+	aShader->uniform("iFlipH", 0);
+	aShader->uniform("iFlipV", 0);
 	aShader->uniform("iParam1", mVDSettings->iParam1);
 	aShader->uniform("iParam2", mVDSettings->iParam2);
 	aShader->uniform("iXorY", mVDSettings->iXorY);
@@ -219,7 +218,7 @@ void BatchassSkyApp::draw()
 	mRenderFbo->getColorTexture()->bind(1);
 	gl::drawSolidRect(Rectf(0, 0, mVDSettings->mFboWidth, mVDSettings->mFboHeight));
 	// stop drawing into the FBO
-	mVDFbos[mVDSettings->mMixFboIndex]->getFboRef()->unbindFramebuffer();
+	mFbo->unbindFramebuffer();
 	mRenderFbo->getColorTexture()->unbind();
 	mRenderFbo->getColorTexture()->unbind();
 
@@ -267,10 +266,10 @@ void BatchassSkyApp::draw()
 		}
 		else {
 			if (i%2 == 0) {
-				warp->draw(mVDFbos[mVDSettings->mMixFboIndex]->getTexture(), mVDUtils->getSrcAreaLeftOrTop());
+				warp->draw(mFbo->getColorTexture(), mVDUtils->getSrcAreaLeftOrTop());
 			}
 			else {
-				warp->draw(mVDFbos[mVDSettings->mMixFboIndex]->getTexture(), mVDUtils->getSrcAreaRightOrBottom());
+				warp->draw(mFbo->getColorTexture(), mVDUtils->getSrcAreaRightOrBottom());
 			}
 		}
 		//warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
