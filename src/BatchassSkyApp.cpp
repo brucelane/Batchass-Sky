@@ -38,7 +38,28 @@ void BatchassSkyApp::setup()
 		// otherwise create a texture from scratch
 		mTexs.push_back(TextureAudio::create());
 	}
+	//load mix shader
+	try
+	{
+		fs::path mixFragFile = getAssetPath("") / "mix.frag";
+		if (fs::exists(mixFragFile))
+		{
+			aShader = gl::GlslProg::create(loadAsset("passthru.vert"), loadFile(mixFragFile));
+		}
+		else
+		{
+			CI_LOG_V("mix.frag does not exist, should quit");
 
+		}
+	}
+	catch (gl::GlslProgCompileExc &exc)
+	{
+		CI_LOG_V("unable to load/compile shader:" + string(exc.what()));
+	}
+	catch (const std::exception &e)
+	{
+		CI_LOG_V("unable to load shader:" + string(e.what()));
+	}
 	// create a batch with our tesselation shader
 	auto format = gl::GlslProg::Format()
 		.vertex(loadAsset("shader.vert"))
@@ -155,7 +176,7 @@ void BatchassSkyApp::draw()
 	* first render the 2 frags to fbos (done before)
 	* then use them as textures for the mix shader
 	*/
-	/*
+	
 	// draw using the mix shader
 	mFbo->bindFramebuffer();
 	//gl::setViewport(mVDFbos[mVDSettings->mMixFboIndex].fbo.getBounds());
@@ -164,7 +185,6 @@ void BatchassSkyApp::draw()
 	gl::clear();
 	gl::setMatricesWindow(mVDSettings->mFboWidth, mVDSettings->mFboHeight);
 
-	aShader = mVDShaders->getMixShader();
 	aShader->bind();
 	aShader->uniform("iGlobalTime", mVDSettings->iGlobalTime);
 	//20140703 aShader->uniform("iResolution", vec3(mVDSettings->mRenderResoXY.x, mVDSettings->mRenderResoXY.y, 1.0));
@@ -236,7 +256,7 @@ void BatchassSkyApp::draw()
 	//sTextures[5] = mVDFbos[mVDSettings->mMixFboIndex]->getTexture();
 
 	//}
-	*/
+	
 	/***********************************************
 	* mix 2 FBOs end
 	*/
@@ -283,7 +303,7 @@ void BatchassSkyApp::draw()
 				warp->draw(mFbo->getColorTexture(), mVDUtils->getSrcAreaRightOrBottom());
 			}
 		}*/
-		warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
+		warp->draw(mFbo->getColorTexture(), mFbo->getBounds());
 		i++;
 	}
 
