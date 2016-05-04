@@ -32,14 +32,11 @@ along with Cinder-Warping.  If not, see <http://www.gnu.org/licenses/>.
 #include "VDSession.h"
 // Utils
 #include "VDUtils.h"
-// Audio
-#include "VDAudio.h"
+// Textures
+#include "VDTexture.h"
 // Animation
 #include "VDAnimation.h"
-// shaders
-#include "VDShaders.h"
-// fbo
-//#include "VDFbo.h"
+
 
 using namespace ci;
 using namespace ci::app;
@@ -76,14 +73,11 @@ private:
 	VDSessionRef				mVDSession;
 	// Utils
 	VDUtilsRef					mVDUtils;
-	// Audio
-	VDAudioRef					mVDAudio;
+	// Textures
+	VDTextureList				mTexs;
+	fs::path					mTexturesFilepath;
 	// Animation
 	VDAnimationRef				mVDAnimation;
-	// Shaders
-	VDShadersRef				mVDShaders;
-	// Fbos
-	//vector<VDFboRef>			mVDFbos;
 	// shaders
 	gl::GlslProgRef				aShader;
 

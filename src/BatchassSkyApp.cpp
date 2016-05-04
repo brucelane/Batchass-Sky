@@ -25,12 +25,19 @@ void BatchassSkyApp::setup()
 	// Utils
 	mVDUtils = VDUtils::create(mVDSettings);
 	mVDUtils->getWindowsResolution();
-	// Audio
-	mVDAudio = VDAudio::create(mVDSettings);
+
 	// Animation
 	mVDAnimation = VDAnimation::create(mVDSettings, mVDSession);
-	// Shaders
-	mVDShaders = VDShaders::create(mVDSettings);
+	// Textures 
+	mTexturesFilepath = getAssetPath("") / mVDSettings->mAssetsPath / "textures.xml";
+	if (fs::exists(mTexturesFilepath)) {
+		// load textures from file if one exists
+		mTexs = VDTexture::readSettings(loadFile(mTexturesFilepath));
+	}
+	else {
+		// otherwise create a texture from scratch
+		mTexs.push_back(TextureAudio::create());
+	}
 
 	// create a batch with our tesselation shader
 	auto format = gl::GlslProg::Format()
@@ -92,13 +99,16 @@ void BatchassSkyApp::cleanup()
 	Warp::writeSettings(mWarps, writeFile(mSettings));
 	mVDSettings->save();
 	mVDSession->save();
+	// save textures
+	VDTexture::writeSettings(mTexs, writeFile(mTexturesFilepath));
 }
 
 void BatchassSkyApp::update()
 {
-	mVDAudio->update();
-	mVDAnimation->update();
+	// get audio spectrum
+	mTexs[0]->getTexture();
 
+	mVDAnimation->update();
 
 	updateWindowTitle();
 }
@@ -145,7 +155,7 @@ void BatchassSkyApp::draw()
 	* first render the 2 frags to fbos (done before)
 	* then use them as textures for the mix shader
 	*/
-
+	/*
 	// draw using the mix shader
 	mFbo->bindFramebuffer();
 	//gl::setViewport(mVDFbos[mVDSettings->mMixFboIndex].fbo.getBounds());
@@ -226,6 +236,7 @@ void BatchassSkyApp::draw()
 	//sTextures[5] = mVDFbos[mVDSettings->mMixFboIndex]->getTexture();
 
 	//}
+	*/
 	/***********************************************
 	* mix 2 FBOs end
 	*/
@@ -244,7 +255,7 @@ void BatchassSkyApp::draw()
 			setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
 			setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
 			fs::path waveFile = getAssetPath("") / mVDSettings->mAssetsPath / mVDSession->getWaveFileName();
-			mVDAudio->loadWaveFile(waveFile.string());
+			mTexs[0]->loadFromFullPath(waveFile.string());
 		}
 	}
 	if (mFadeOutDelay) {
@@ -258,7 +269,7 @@ void BatchassSkyApp::draw()
 	//gl::draw(mRenderFbo->getColorTexture());
 	int i = 0;
 	for (auto &warp : mWarps) {
-		if (mUseBeginEnd) {
+		/*if (mUseBeginEnd) {
 
 			int w = mRenderFbo->getColorTexture()->getWidth();
 			int h = mRenderFbo->getColorTexture()->getHeight();
@@ -271,8 +282,8 @@ void BatchassSkyApp::draw()
 			else {
 				warp->draw(mFbo->getColorTexture(), mVDUtils->getSrcAreaRightOrBottom());
 			}
-		}
-		//warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
+		}*/
+		warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
 		i++;
 	}
 
