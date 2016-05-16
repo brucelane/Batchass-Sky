@@ -78,7 +78,7 @@ private:
 	fs::path					mTexturesFilepath;
 	// Animation
 	VDAnimationRef				mVDAnimation;
-	// shaders
+	// shader
 	gl::GlslProgRef				aShader;
 
 	bool						mUseBeginEnd;
