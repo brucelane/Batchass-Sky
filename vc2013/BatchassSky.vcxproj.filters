@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -14,91 +13,70 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
     <Filter Include="Blocks">
-      <UniqueIdentifier>{359CB351-0170-4197-B5AA-557E6CCAF8DE}</UniqueIdentifier>
+      <UniqueIdentifier>{27D5E172-79A9-4FA3-956E-7B7B34C85FF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-Hap2">
-      <UniqueIdentifier>{5CEE63D4-B887-4C23-96B2-C491B3A6501E}</UniqueIdentifier>
+      <UniqueIdentifier>{312A6F17-D0C2-4F7E-A300-93FB2D7F7D73}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-Hap2\src">
-      <UniqueIdentifier>{2DE40141-88DD-40A9-BCAB-C5758AA63486}</UniqueIdentifier>
+      <UniqueIdentifier>{7165D878-8980-4F42-B17E-F4AB54BD845A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blocks\Cinder-MIDI2">
-      <UniqueIdentifier>{DAD66D76-5FE8-4E64-B536-FB34B681C4F2}</UniqueIdentifier>
+    <Filter Include="Blocks\ImGui">
+      <UniqueIdentifier>{0370AEC3-8F88-4355-95A4-CB822EEC7895}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blocks\Cinder-MIDI2\include">
-      <UniqueIdentifier>{C7EA3787-9F5A-4406-BFAE-E878230BD6CB}</UniqueIdentifier>
+    <Filter Include="Blocks\ImGui\include">
+      <UniqueIdentifier>{364D0548-2C14-421A-B2B4-5B0A5B22D368}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blocks\Cinder-MIDI2\lib">
-      <UniqueIdentifier>{52ADAAA1-5C76-40A9-AA5B-18A64F852BF4}</UniqueIdentifier>
+    <Filter Include="Blocks\ImGui\lib">
+      <UniqueIdentifier>{0D606897-CC2F-4CEE-B5B4-63FF4C01F36A}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Blocks\Cinder-MIDI2\src">
-      <UniqueIdentifier>{F1CFAE10-53FC-462E-9576-1BB1FCF58ACA}</UniqueIdentifier>
+    <Filter Include="Blocks\ImGui\lib\imgui">
+      <UniqueIdentifier>{1548DF5C-732F-4545-8A96-3F2BBC71BE25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\ImGui\src">
+      <UniqueIdentifier>{CE37CE61-7A88-4C91-B696-9CC2FFF2B646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Midi2">
+      <UniqueIdentifier>{EFF86B97-82D2-4CA3-8AB7-39EFCF83956F}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Midi2\include">
+      <UniqueIdentifier>{94216BB2-9833-46C6-B221-DD191BC5994D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Midi2\lib">
+      <UniqueIdentifier>{B6016E8F-40BF-4546-9202-343E313628CA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blocks\Midi2\src">
+      <UniqueIdentifier>{F2B36A4B-73B9-48D0-A796-A9C5301D2997}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Videodromm">
-      <UniqueIdentifier>{F2F11C25-08D5-477B-B844-3201983C4672}</UniqueIdentifier>
+      <UniqueIdentifier>{8F47C71F-BF3D-4C80-980B-46EC28B701D7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Videodromm\include">
-      <UniqueIdentifier>{5888882F-6196-4692-9362-0BC37752DE73}</UniqueIdentifier>
+      <UniqueIdentifier>{ACDF5E4D-307C-46F3-8157-0219B03E7349}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Videodromm\src">
-      <UniqueIdentifier>{26142230-4DDE-43B8-86E0-4AB81E0A6202}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Fbos">
-      <UniqueIdentifier>{75CB467F-9464-41C9-8C21-2A99F35F1B04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Fbos\include">
-      <UniqueIdentifier>{048FFC1F-BA28-4B62-9F1F-72CDB280CB99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Fbos\src">
-      <UniqueIdentifier>{BB0635DF-C40D-4938-B5D7-3C2DFC114EB1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Router">
-      <UniqueIdentifier>{75142B7C-D222-4FCA-83D3-F3429F78F210}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Router\include">
-      <UniqueIdentifier>{C6606CA2-268E-417A-B424-0A0640BDA81E}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Router\src">
-      <UniqueIdentifier>{69B8BA81-793A-499C-B295-58C6FEDDCCF9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Textures">
-      <UniqueIdentifier>{F1432774-25CD-4D8F-B347-1A0F89966DC9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Textures\include">
-      <UniqueIdentifier>{6096384F-E9DF-408C-B85C-D495D3F47F29}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Textures\src">
-      <UniqueIdentifier>{080BEA75-3C15-4233-920E-D6DCA9D7D1A5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Warps">
-      <UniqueIdentifier>{EE11B520-1006-4B48-9AD3-5B71831874AC}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Warps\include">
-      <UniqueIdentifier>{EA60A353-11CF-429D-9722-F46D77F943CA}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Blocks\Videodromm-Warps\src">
-      <UniqueIdentifier>{CD0A4C03-DD69-43B7-8FDA-C6170989FBF3}</UniqueIdentifier>
+      <UniqueIdentifier>{E51C0BE5-4685-4EA7-B98E-FC1E0777394F}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-Warping">
-      <UniqueIdentifier>{38E43D25-4587-4687-B89C-32617D6790AC}</UniqueIdentifier>
+      <UniqueIdentifier>{2408A3F5-86CE-4E71-A7F0-94C26AB5E458}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-Warping\include">
-      <UniqueIdentifier>{DB26F731-E8FF-42DF-A805-0AB9BA76C8A2}</UniqueIdentifier>
+      <UniqueIdentifier>{48CDA3F6-093C-45A7-A3B9-F37D97106C61}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-Warping\src">
-      <UniqueIdentifier>{79DED2CC-CF17-41E8-9BC1-0CBD707EDF4A}</UniqueIdentifier>
+      <UniqueIdentifier>{1698925B-F156-4AFA-B8E4-E5B5E66D481A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-WebSocketPP">
-      <UniqueIdentifier>{FE346808-BCA0-4F68-87B1-8EBA22C08010}</UniqueIdentifier>
+      <UniqueIdentifier>{19185EFD-8B93-4070-ACF9-CD10045D342C}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\Cinder-WebSocketPP\src">
-      <UniqueIdentifier>{4DAC5DD6-78C8-4369-A373-F7CFF85560B9}</UniqueIdentifier>
+      <UniqueIdentifier>{8FE48F5D-4648-45B2-8655-02068CF83DA6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\OSC">
-      <UniqueIdentifier>{F621EC31-6441-494F-A466-A6048A0E4697}</UniqueIdentifier>
+      <UniqueIdentifier>{24F6BEB2-10F2-474D-8A6E-039EE185513A}</UniqueIdentifier>
     </Filter>
     <Filter Include="Blocks\OSC\src">
-      <UniqueIdentifier>{133BAB9E-4634-407A-8A37-9FF061128F5A}</UniqueIdentifier>
+      <UniqueIdentifier>{8B6EE57E-FD49-483B-A6E1-7C9528F1108D}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -123,32 +101,62 @@
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\MovieHap.h">
       <Filter>Blocks\Cinder-Hap2\src</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\include\CinderImGui.h">
+      <Filter>Blocks\ImGui\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\include\imgui_user.h">
+      <Filter>Blocks\ImGui\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\include\imgui_user.inl">
+      <Filter>Blocks\ImGui\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imconfig.h">
+      <Filter>Blocks\ImGui\lib\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui.h">
+      <Filter>Blocks\ImGui\lib\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui_internal.h">
+      <Filter>Blocks\ImGui\lib\imgui</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\src\CinderImGui.cpp">
+      <Filter>Blocks\ImGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui.cpp">
+      <Filter>Blocks\ImGui\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui_draw.cpp">
+      <Filter>Blocks\ImGui\lib\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui_demo.cpp">
+      <Filter>Blocks\ImGui\lib\imgui</Filter>
+    </ClCompile>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\CinderMidi.h">
-      <Filter>Blocks\Cinder-MIDI2\include</Filter>
+      <Filter>Blocks\Midi2\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiExceptions.h">
-      <Filter>Blocks\Cinder-MIDI2\include</Filter>
+      <Filter>Blocks\Midi2\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiHub.h">
-      <Filter>Blocks\Cinder-MIDI2\include</Filter>
+      <Filter>Blocks\Midi2\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiOut.h">
-      <Filter>Blocks\Cinder-MIDI2\include</Filter>
+      <Filter>Blocks\Midi2\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\lib\RtMidi.h">
-      <Filter>Blocks\Cinder-MIDI2\lib</Filter>
+      <Filter>Blocks\Midi2\lib</Filter>
     </ClInclude>
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\lib\RtMidi.cpp">
-      <Filter>Blocks\Cinder-MIDI2\lib</Filter>
+      <Filter>Blocks\Midi2\lib</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiHub.cpp">
-      <Filter>Blocks\Cinder-MIDI2\src</Filter>
+      <Filter>Blocks\Midi2\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\CinderMidi.cpp">
-      <Filter>Blocks\Cinder-MIDI2\src</Filter>
+      <Filter>Blocks\Midi2\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiOut.cpp">
-      <Filter>Blocks\Cinder-MIDI2\src</Filter>
+      <Filter>Blocks\Midi2\src</Filter>
     </ClCompile>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\LiveParam.h">
       <Filter>Blocks\Videodromm\include</Filter>
@@ -156,13 +164,73 @@
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDAnimation.h">
       <Filter>Blocks\Videodromm\include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDConsole.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDFbo.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDLog.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDMix.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDRouter.h">
       <Filter>Blocks\Videodromm\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDSession.h">
       <Filter>Blocks\Videodromm\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDSettings.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDShader.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDTexture.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUI.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIAnimation.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIAudio.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIBlend.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIChannels.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIColor.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIFbos.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIMidi.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIMouse.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIOsc.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIShaders.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUITempo.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUITextures.h">
+      <Filter>Blocks\Videodromm\include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIWebsockets.h">
       <Filter>Blocks\Videodromm\include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUtils.h">
@@ -177,7 +245,19 @@
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDAnimation.cpp">
       <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDConsole.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDFbo.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDLog.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDMix.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDRouter.cpp">
       <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDSession.cpp">
@@ -186,38 +266,56 @@
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDSettings.cpp">
       <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUtils.cpp">
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDShader.cpp">
       <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Fbos\include\VDFbo.h">
-      <Filter>Blocks\Videodromm-Fbos\include</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Fbos\include\VDMix.h">
-      <Filter>Blocks\Videodromm-Fbos\include</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Fbos\src\VDFbo.cpp">
-      <Filter>Blocks\Videodromm-Fbos\src</Filter>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDTexture.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Fbos\src\VDMix.cpp">
-      <Filter>Blocks\Videodromm-Fbos\src</Filter>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUI.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Router\include\VDRouter.h">
-      <Filter>Blocks\Videodromm-Router\include</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Router\src\VDRouter.cpp">
-      <Filter>Blocks\Videodromm-Router\src</Filter>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIAnimation.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Textures\include\VDTexture.h">
-      <Filter>Blocks\Videodromm-Textures\include</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Textures\src\VDTexture.cpp">
-      <Filter>Blocks\Videodromm-Textures\src</Filter>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIAudio.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Warps\include\VDWarp.h">
-      <Filter>Blocks\Videodromm-Warps\include</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Warps\src\VDWarp.cpp">
-      <Filter>Blocks\Videodromm-Warps\src</Filter>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIBlend.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIChannels.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIColor.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIFbos.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIMidi.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIMouse.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIOsc.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIShaders.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUITempo.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUITextures.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIWebsockets.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUtils.cpp">
+      <Filter>Blocks\Videodromm\src</Filter>
     </ClCompile>
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Warping\include\Warp.h">
       <Filter>Blocks\Cinder-Warping\include</Filter>
@@ -258,19 +356,10 @@
     <ClInclude Include="..\..\..\Cinder\blocks\OSC\src\Osc.h">
       <Filter>Blocks\OSC\src</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Fbos\src\VDShaders.cpp">
-      <Filter>Blocks\Videodromm-Fbos\src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\BatchassSkyApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm-Fbos\include\VDShaders.h">
-      <Filter>Blocks\Videodromm-Fbos\include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
