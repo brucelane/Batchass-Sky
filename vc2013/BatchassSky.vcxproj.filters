@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
@@ -77,6 +78,9 @@
     </Filter>
     <Filter Include="Blocks\OSC\src">
       <UniqueIdentifier>{8B6EE57E-FD49-483B-A6E1-7C9528F1108D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{56f1eb87-9d3f-4c2d-a62b-6507559ac17e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -366,5 +370,22 @@
     <ResourceCompile Include="Resources.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\shader.cont">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\shader.eval">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\shader.frag">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\shader.geom">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\assets\shader.vert">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
 </Project>
