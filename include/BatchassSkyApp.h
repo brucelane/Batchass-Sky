@@ -30,13 +30,6 @@ along with Cinder-Warping.  If not, see <http://www.gnu.org/licenses/>.
 #include "VDSettings.h"
 // Session
 #include "VDSession.h"
-// Utils
-#include "VDUtils.h"
-// Textures
-#include "VDTexture.h"
-// Animation
-#include "VDAnimation.h"
-
 
 using namespace ci;
 using namespace ci::app;
@@ -71,13 +64,7 @@ private:
 	VDSettingsRef				mVDSettings;
 	// Session
 	VDSessionRef				mVDSession;
-	// Utils
-	VDUtilsRef					mVDUtils;
-	// Textures
-	VDTextureList				mTexs;
-	fs::path					mTexturesFilepath;
-	// Animation
-	VDAnimationRef				mVDAnimation;
+
 	// shader
 	gl::GlslProgRef				aShader;
 
