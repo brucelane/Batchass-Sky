@@ -76,9 +76,9 @@ void BatchassSkyApp::setup()
 		mWarps.push_back(WarpPerspectiveBilinear::create());
 		mWarps.push_back(WarpPerspectiveBilinear::create());
 	}
-		//mWarps.push_back(WarpPerspectiveBilinear::create());
+	//mWarps.push_back(WarpPerspectiveBilinear::create());
 
-	// render fbo
+// render fbo
 	gl::Fbo::Format fboFormat;
 	//format.setSamples( 4 ); // uncomment this to enable 4x antialiasing
 	mRenderFbo = gl::Fbo::create(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight, fboFormat.colorTexture());
@@ -155,7 +155,7 @@ void BatchassSkyApp::draw()
 	* first render the 2 frags to fbos (done before)
 	* then use them as textures for the mix shader
 	*/
-	
+
 	// draw using the mix shader
 	mFbo->bindFramebuffer();
 	//gl::setViewport(mVDFbos[mVDSettings->mMixFboIndex].fbo.getBounds());
@@ -169,41 +169,42 @@ void BatchassSkyApp::draw()
 	//20140703 aShader->uniform("iResolution", vec3(mVDSettings->mRenderResoXY.x, mVDSettings->mRenderResoXY.y, 1.0));
 	aShader->uniform("iResolution", vec3(mVDSettings->mFboWidth, mVDSettings->mFboHeight, 1.0));
 	//aShader->uniform("iChannelResolution", mVDSettings->iChannelResolution, 4);
-	//aShader->uniform("iMouse", vec4(mVDSettings->mRenderPosXY.x, mVDSettings->mRenderPosXY.y, mVDSettings->iMouse.z, mVDSettings->iMouse.z));//iMouse =  Vec3i( event.getX(), mRenderHeight - event.getY(), 1 );
+	aShader->uniform("iMouse", mVDSession->getVec4UniformValueByName("iMouse"));
 	aShader->uniform("iChannel0", 0);
 	aShader->uniform("iChannel1", 1);
 	aShader->uniform("iAudio0", 0);
+	aShader->uniform("iAlpha", mVDSession->getControlValueByName("iAlpha") * mVDSettings->iAlpha);
+	aShader->uniform("iColor", vec3(mVDSession->getControlValueByName("iFR"), mVDSession->getControlValueByName("iFG"), mVDSession->getControlValueByName("iFB")));
+	aShader->uniform("iBackgroundColor", vec3(mVDSession->getControlValueByName("iBR"), mVDSession->getControlValueByName("iBG"), mVDSession->getControlValueByName("iBB")));
+	aShader->uniform("iSteps", (int)mVDSession->getControlValueByName("iSteps"));
+	aShader->uniform("iRatio", mVDSession->getControlValueByName("iRatio"));
+	aShader->uniform("iBlendmode", mVDSession->getIntUniformValueByName("iBlendmode"));
+	aShader->uniform("iChromatic", mVDSession->getControlValueByName("iChromatic"));
+	aShader->uniform("iRotationSpeed", mVDSession->getControlValueByName("iRotationSpeed"));
+	aShader->uniform("iCrossfade", mVDSession->getControlValueByName("iCrossfade"));
+	aShader->uniform("iPixelate", mVDSession->getControlValueByName("iPixelate"));
+	aShader->uniform("iExposure", mVDSession->getControlValueByName("iExposure"));
+	aShader->uniform("iToggle", (int)mVDSession->getBoolUniformValueByName("iToggle"));
+	aShader->uniform("iVignette", (int)mVDSession->getBoolUniformValueByName("iVignette"));
+	aShader->uniform("iInvert", (int)mVDSession->getBoolUniformValueByName("iInvert"));
+	aShader->uniform("iGlitch", (int)mVDSession->getBoolUniformValueByName("iGlitch"));
+	aShader->uniform("iTrixels", mVDSession->getControlValueByName("iTrixels"));
+	aShader->uniform("iGridSize", mVDSession->getControlValueByName("iGridSize"));
+	aShader->uniform("iRedMultiplier", mVDSession->getControlValueByName("iRedMultiplier"));
+	aShader->uniform("iGreenMultiplier", mVDSession->getControlValueByName("iGreenMultiplier"));
+	aShader->uniform("iBlueMultiplier", mVDSession->getControlValueByName("iBlueMultiplier"));
+
+	aShader->uniform("iFps", mVDSession->getControlValueByName("iFps"));
+	aShader->uniform("iBadTv", mVDSession->getControlValueByName("iBadTv"));
+	aShader->uniform("iTempoTime", mVDSession->getControlValueByName("iTempoTime"));
 	/*aShader->uniform("iFreq0", mVDAnimation->iFreqs[0]);
 	aShader->uniform("iFreq1", mVDAnimation->iFreqs[1]);
 	aShader->uniform("iFreq2", mVDAnimation->iFreqs[2]);
 	aShader->uniform("iFreq3", mVDAnimation->iFreqs[3]);
 	aShader->uniform("iChannelTime", mVDSettings->iChannelTime, 4);
-	aShader->uniform("iColor", vec3(mVDAnimation->controlValues[1], mVDAnimation->controlValues[2], mVDAnimation->controlValues[3]));// mVDSettings->iColor);
-	aShader->uniform("iBackgroundColor", vec3(mVDAnimation->controlValues[5], mVDAnimation->controlValues[6], mVDAnimation->controlValues[7]));// mVDSettings->iBackgroundColor);
-	aShader->uniform("iSteps", (int)mVDAnimation->controlValues[20]);
-	aShader->uniform("iRatio", mVDAnimation->controlValues[11]);//check if needed: +1;//mVDSettings->iRatio); 
-	aShader->uniform("iZoom", mVDAnimation->controlValues[22]);
-	aShader->uniform("iAlpha", mVDAnimation->controlValues[4] * mVDSettings->iAlpha);
-	aShader->uniform("iBlendmode", mVDSettings->iBlendMode);
-	aShader->uniform("iChromatic", mVDAnimation->controlValues[10]);
-	aShader->uniform("iRotationSpeed", mVDAnimation->controlValues[19]);
-	aShader->uniform("iCrossfade", mVDAnimation->controlValues[18]);
-	aShader->uniform("iPixelate", mVDAnimation->controlValues[15]);
-	aShader->uniform("iExposure", mVDAnimation->controlValues[14]);
-	aShader->uniform("iToggle", (int)mVDAnimation->controlValues[46]);
-	aShader->uniform("iVignette", (int)mVDAnimation->controlValues[47]);
-	aShader->uniform("iInvert", (int)mVDAnimation->controlValues[48]);
-	aShader->uniform("iFps", mVDSettings->iFps);
-	aShader->uniform("iTempoTime", mVDAnimation->iTempoTime);
-	aShader->uniform("iGlitch", (int)mVDAnimation->controlValues[45]);
-	aShader->uniform("iTrixels", mVDAnimation->controlValues[16]);
-	aShader->uniform("iGridSize", mVDAnimation->controlValues[17]);
-	aShader->uniform("iRedMultiplier", mVDSettings->iRedMultiplier);
-	aShader->uniform("iGreenMultiplier", mVDSettings->iGreenMultiplier);
-	aShader->uniform("iBlueMultiplier", mVDSettings->iBlueMultiplier);
-	aShader->uniform("iBadTv", mVDSettings->iBadTv);
 	aShader->uniform("iDeltaTime", mVDAnimation->iDeltaTime);
 */
+	aShader->uniform("iZoom", mVDSession->getControlValueByName("iZoom"));
 	aShader->uniform("iRenderXY", mVDSettings->mRenderXY);
 	aShader->uniform("iFade", (int)mVDSettings->iFade);
 	aShader->uniform("iLight", (int)mVDSettings->iLight);
@@ -234,7 +235,7 @@ void BatchassSkyApp::draw()
 	//sTextures[5] = mVDFbos[mVDSettings->mMixFboIndex]->getTexture();
 
 	//}
-	
+
 	/***********************************************
 	* mix 2 FBOs end
 	*/
@@ -248,12 +249,11 @@ void BatchassSkyApp::draw()
 	}
 	if (mWaveDelay) {
 		if (getElapsedFrames() > mVDSession->getWavePlaybackDelay()) {
-
 			mWaveDelay = false;
 			setWindowSize(mVDSettings->mRenderWidth, mVDSettings->mRenderHeight);
 			setWindowPos(ivec2(mVDSettings->mRenderX, mVDSettings->mRenderY));
 			fs::path waveFile = getAssetPath("") / mVDSettings->mAssetsPath / mVDSession->getWaveFileName();
-			// TODO mTexs[0]->loadFromFullPath(waveFile.string());
+			mVDSession->loadAudioFile(waveFile.string());
 		}
 	}
 	if (mFadeOutDelay) {
@@ -282,7 +282,7 @@ void BatchassSkyApp::draw()
 			}
 		}*/
 		warp->draw(mFbo->getColorTexture(), mFbo->getBounds());
-		//warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
+		//if (i == 0) warp->draw(mRenderFbo->getColorTexture(), mRenderFbo->getBounds());
 		i++;
 	}
 
@@ -337,7 +337,7 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 	// pass this key event to the warp editor first
 	if (!Warp::handleKeyDown(mWarps, event)) {
 		// warp editor did not handle the key, so handle it here
-		//if (!mVDAnimation->handleKeyDown(event)) {
+		if (!mVDSession->handleKeyDown(event)) {
 			// Animation did not handle the key, so handle it here
 			switch (event.getCode()) {
 
@@ -372,17 +372,17 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 				//mVDSettings->mSplitWarpH = !mVDSettings->mSplitWarpH;
 				//mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
 				break;
-			/*case KeyEvent::KEY_r:
-				// reset split the image
-				mVDSettings->mSplitWarpV = false;
-				mVDSettings->mSplitWarpH = false;
-				mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
-				break;
+				/*case KeyEvent::KEY_r:
+					// reset split the image
+					mVDSettings->mSplitWarpV = false;
+					mVDSettings->mSplitWarpH = false;
+					mVDUtils->splitWarp(mRenderFbo->getWidth(), mRenderFbo->getHeight());
+					break;*/
 			case KeyEvent::KEY_c:
 				mWarps.push_back(WarpPerspectiveBilinear::create());
 				mWarps[mWarps.size() - 1]->setWidth(100);
-				mWarps[mWarps.size() - 1]->setHeight(100);*/
-				
+				mWarps[mWarps.size() - 1]->setHeight(100);
+
 			case KeyEvent::KEY_a:
 				fileName = "warps" + toString(getElapsedFrames()) + ".xml";
 				mSettings = getAssetPath("") / mVDSettings->mAssetsPath / fileName;
@@ -398,16 +398,16 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 			mInnerLevel = math<float>::max(mInnerLevel, 1.0f);
 			mOuterLevel = math<float>::max(mOuterLevel, 1.0f);
 		}
-	//}
+	}
 }
 
 void BatchassSkyApp::keyUp(KeyEvent event)
 {
 	// pass this key event to the warp editor first
 	if (!Warp::handleKeyUp(mWarps, event)) {
-		//if (!mVDAnimation->handleKeyUp(event)) {
+		if (!mVDSession->handleKeyUp(event)) {
 			// Animation did not handle the key, so handle it here
-		//}
+		}
 	}
 }
 
