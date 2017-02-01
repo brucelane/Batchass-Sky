@@ -115,13 +115,6 @@
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\assets\shader.cont" />
-    <None Include="..\assets\shader.eval" />
-    <None Include="..\assets\shader.frag" />
-    <None Include="..\assets\shader.geom" />
-    <None Include="..\assets\shader.vert" />
-  </ItemGroup>
-  <ItemGroup>
     <Xml Include="Debug\VDSettings.xml" />
     <Xml Include="Release\VDSettings.xml" />
   </ItemGroup>
@@ -230,6 +223,13 @@
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketClient.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketConnection.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketServer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\assets\sky\shader.cont" />
+    <None Include="..\..\assets\sky\shader.eval" />
+    <None Include="..\..\assets\sky\shader.frag" />
+    <None Include="..\..\assets\sky\shader.geom" />
+    <None Include="..\..\assets\sky\shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

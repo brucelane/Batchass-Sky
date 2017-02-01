@@ -134,6 +134,8 @@ void BatchassSkyApp::renderSceneToFbo()
 	// update uniforms
 	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel + mVDSession->getMaxVolume() / 10);
 	mBatch->getGlslProg()->uniform("uTessLevelOuter", mOuterLevel);
+	mBatch->getGlslProg()->uniform("iFR", mVDSession->getControlValueByName("iFR"));
+	mBatch->getGlslProg()->uniform("iFG", mVDSession->getControlValueByName("iFG"));
 
 	// bypass gl::Batch::draw method so we can use GL_PATCHES
 	gl::ScopedVao scopedVao(mBatch->getVao().get());
@@ -341,10 +343,10 @@ void BatchassSkyApp::keyDown(KeyEvent event)
 			// Animation did not handle the key, so handle it here
 			switch (event.getCode()) {
 
-			case KeyEvent::KEY_LEFT: mInnerLevel--; break;
-			case KeyEvent::KEY_RIGHT: mInnerLevel++; break;
-			case KeyEvent::KEY_DOWN: mOuterLevel--; break;
-			case KeyEvent::KEY_UP: mOuterLevel++; break;
+			case KeyEvent::KEY_LEFT: mInnerLevel -= 0.1f; break;
+			case KeyEvent::KEY_RIGHT: mInnerLevel += 0.1f; break;
+			case KeyEvent::KEY_DOWN: mOuterLevel -= 0.1f; break;
+			case KeyEvent::KEY_UP: mOuterLevel += 0.1f; break;
 			case KeyEvent::KEY_1: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Cube())); break;
 			case KeyEvent::KEY_2: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Icosahedron())); break;
 			case KeyEvent::KEY_3: mBatch->replaceVboMesh(gl::VboMesh::create(geom::Sphere())); break;

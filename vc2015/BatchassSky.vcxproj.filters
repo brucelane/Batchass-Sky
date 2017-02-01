@@ -411,28 +411,28 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\assets\shader.cont">
-      <Filter>assets</Filter>
-    </None>
-    <None Include="..\assets\shader.eval">
-      <Filter>assets</Filter>
-    </None>
-    <None Include="..\assets\shader.frag">
-      <Filter>assets</Filter>
-    </None>
-    <None Include="..\assets\shader.geom">
-      <Filter>assets</Filter>
-    </None>
-    <None Include="..\assets\shader.vert">
-      <Filter>assets</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Xml Include="Debug\VDSettings.xml">
       <Filter>debug</Filter>
     </Xml>
     <Xml Include="Release\VDSettings.xml">
       <Filter>release</Filter>
     </Xml>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\assets\sky\shader.cont">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\..\assets\sky\shader.eval">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\..\assets\sky\shader.frag">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\..\assets\sky\shader.geom">
+      <Filter>assets</Filter>
+    </None>
+    <None Include="..\..\assets\sky\shader.vert">
+      <Filter>assets</Filter>
+    </None>
   </ItemGroup>
 </Project>
