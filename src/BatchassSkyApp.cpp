@@ -107,7 +107,7 @@ void BatchassSkyApp::cleanup()
 
 void BatchassSkyApp::update()
 {
-	mVDSession->setControlValue(mVDSettings->IFPS, getAverageFps());
+	mVDSession->setFloatUniformValueByIndex(mVDSettings->IFPS, getAverageFps());
 	mVDSession->update();
 
 	updateWindowTitle();
@@ -134,9 +134,9 @@ void BatchassSkyApp::renderSceneToFbo()
 	// update uniforms
 	mBatch->getGlslProg()->uniform("uTessLevelInner", mInnerLevel + mVDSession->getMaxVolume() / 10);
 	mBatch->getGlslProg()->uniform("uTessLevelOuter", mOuterLevel);
-	mBatch->getGlslProg()->uniform("iFR", mVDSession->getControlValueByName("iFR"));
-	mBatch->getGlslProg()->uniform("iFG", mVDSession->getControlValueByName("iFG"));
-	mBatch->getGlslProg()->uniform("iAlpha", mVDSession->getControlValueByName("iAlpha"));
+	mBatch->getGlslProg()->uniform("iFR", mVDSession->getFloatUniformValueByName("iFR"));
+	mBatch->getGlslProg()->uniform("iFG", mVDSession->getFloatUniformValueByName("iFG"));
+	mBatch->getGlslProg()->uniform("iAlpha", mVDSession->getFloatUniformValueByName("iAlpha"));
 
 	// bypass gl::Batch::draw method so we can use GL_PATCHES
 	gl::ScopedVao scopedVao(mBatch->getVao().get());
@@ -193,7 +193,7 @@ void BatchassSkyApp::draw()
 		gl::setMatricesWindow(mVDSettings->mFboWidth, mVDSettings->mFboHeight);
 
 		aShader->bind();
-		aShader->uniform("iGlobalTime", mVDSession->getControlValue(0));
+		aShader->uniform("iGlobalTime", mVDSession->getFloatUniformValueByIndex(0));
 		//20140703 aShader->uniform("iResolution", vec3(mVDSettings->mRenderResoXY.x, mVDSettings->mRenderResoXY.y, 1.0));
 		aShader->uniform("iResolution", vec3(mVDSettings->mFboWidth, mVDSettings->mFboHeight, 1.0));
 		//aShader->uniform("iChannelResolution", mVDSettings->iChannelResolution, 4);
@@ -201,30 +201,30 @@ void BatchassSkyApp::draw()
 		aShader->uniform("iChannel0", 0);
 		aShader->uniform("iChannel1", 1);
 		aShader->uniform("iAudio0", 0);
-		aShader->uniform("iAlpha", mVDSession->getControlValueByName("iAlpha") * mVDSettings->iAlpha);
-		aShader->uniform("iColor", vec3(mVDSession->getControlValueByName("iFR"), mVDSession->getControlValueByName("iFG"), mVDSession->getControlValueByName("iFB")));
-		aShader->uniform("iBackgroundColor", vec3(mVDSession->getControlValueByName("iBR"), mVDSession->getControlValueByName("iBG"), mVDSession->getControlValueByName("iBB")));
-		aShader->uniform("iSteps", (int)mVDSession->getControlValueByName("iSteps"));
-		aShader->uniform("iRatio", mVDSession->getControlValueByName("iRatio"));
+		aShader->uniform("iAlpha", mVDSession->getFloatUniformValueByName("iAlpha") * mVDSettings->iAlpha);
+		aShader->uniform("iColor", vec3(mVDSession->getFloatUniformValueByName("iFR"), mVDSession->getFloatUniformValueByName("iFG"), mVDSession->getFloatUniformValueByName("iFB")));
+		aShader->uniform("iBackgroundColor", vec3(mVDSession->getFloatUniformValueByName("iBR"), mVDSession->getFloatUniformValueByName("iBG"), mVDSession->getFloatUniformValueByName("iBB")));
+		aShader->uniform("iSteps", (int)mVDSession->getFloatUniformValueByName("iSteps"));
+		aShader->uniform("iRatio", mVDSession->getFloatUniformValueByName("iRatio"));
 		aShader->uniform("iBlendmode", mVDSession->getIntUniformValueByName("iBlendmode"));
-		aShader->uniform("iChromatic", mVDSession->getControlValueByName("iChromatic"));
-		aShader->uniform("iRotationSpeed", mVDSession->getControlValueByName("iRotationSpeed"));
-		aShader->uniform("iCrossfade", mVDSession->getControlValueByName("iCrossfade"));
-		aShader->uniform("iPixelate", mVDSession->getControlValueByName("iPixelate"));
-		aShader->uniform("iExposure", mVDSession->getControlValueByName("iExposure"));
+		aShader->uniform("iChromatic", mVDSession->getFloatUniformValueByName("iChromatic"));
+		aShader->uniform("iRotationSpeed", mVDSession->getFloatUniformValueByName("iRotationSpeed"));
+		aShader->uniform("iCrossfade", mVDSession->getFloatUniformValueByName("iCrossfade"));
+		aShader->uniform("iPixelate", mVDSession->getFloatUniformValueByName("iPixelate"));
+		aShader->uniform("iExposure", mVDSession->getFloatUniformValueByName("iExposure"));
 		aShader->uniform("iToggle", (int)mVDSession->getBoolUniformValueByName("iToggle"));
 		aShader->uniform("iVignette", (int)mVDSession->getBoolUniformValueByName("iVignette"));
 		aShader->uniform("iInvert", (int)mVDSession->getBoolUniformValueByName("iInvert"));
 		aShader->uniform("iGlitch", (int)mVDSession->getBoolUniformValueByName("iGlitch"));
-		aShader->uniform("iTrixels", mVDSession->getControlValueByName("iTrixels"));
-		aShader->uniform("iGridSize", mVDSession->getControlValueByName("iGridSize"));
-		aShader->uniform("iRedMultiplier", mVDSession->getControlValueByName("iRedMultiplier"));
-		aShader->uniform("iGreenMultiplier", mVDSession->getControlValueByName("iGreenMultiplier"));
-		aShader->uniform("iBlueMultiplier", mVDSession->getControlValueByName("iBlueMultiplier"));
+		aShader->uniform("iTrixels", mVDSession->getFloatUniformValueByName("iTrixels"));
+		aShader->uniform("iGridSize", mVDSession->getFloatUniformValueByName("iGridSize"));
+		aShader->uniform("iRedMultiplier", mVDSession->getFloatUniformValueByName("iRedMultiplier"));
+		aShader->uniform("iGreenMultiplier", mVDSession->getFloatUniformValueByName("iGreenMultiplier"));
+		aShader->uniform("iBlueMultiplier", mVDSession->getFloatUniformValueByName("iBlueMultiplier"));
 
-		aShader->uniform("iFps", mVDSession->getControlValueByName("iFps"));
-		aShader->uniform("iBadTv", mVDSession->getControlValueByName("iBadTv"));
-		aShader->uniform("iTempoTime", mVDSession->getControlValueByName("iTempoTime"));
+		aShader->uniform("iFps", mVDSession->getFloatUniformValueByName("iFps"));
+		aShader->uniform("iBadTv", mVDSession->getFloatUniformValueByName("iBadTv"));
+		aShader->uniform("iTempoTime", mVDSession->getFloatUniformValueByName("iTempoTime"));
 		/*aShader->uniform("iFreq0", mVDAnimation->iFreqs[0]);
 		aShader->uniform("iFreq1", mVDAnimation->iFreqs[1]);
 		aShader->uniform("iFreq2", mVDAnimation->iFreqs[2]);
@@ -232,11 +232,11 @@ void BatchassSkyApp::draw()
 		aShader->uniform("iChannelTime", mVDSettings->iChannelTime, 4);
 		aShader->uniform("iDeltaTime", mVDAnimation->iDeltaTime);
 		*/
-		aShader->uniform("iZoom", mVDSession->getControlValueByName("iZoom"));
+		aShader->uniform("iZoom", mVDSession->getFloatUniformValueByName("iZoom"));
 		aShader->uniform("iRenderXY", mVDSettings->mRenderXY);
 		aShader->uniform("iFade", (int)mVDSettings->iFade);
-		aShader->uniform("iLight", (int)mVDSettings->iLight);
-		aShader->uniform("iLightAuto", (int)mVDSettings->iLightAuto);
+		//aShader->uniform("iLight", (int)mVDSettings->iLight);
+		//aShader->uniform("iLightAuto", (int)mVDSettings->iLightAuto);
 		aShader->uniform("iGreyScale", (int)mVDSettings->iGreyScale);
 		aShader->uniform("iTransition", mVDSettings->iTransition);
 		aShader->uniform("iAnim", mVDSettings->iAnim.value());
