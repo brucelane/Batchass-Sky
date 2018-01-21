@@ -14,7 +14,8 @@ void BatchassSkyApp::prepare(Settings *settings)
 	settings->setWindowSize(40, 10);
 }
 
-void BatchassSkyApp::setup()
+BatchassSkyApp::BatchassSkyApp() //setup()
+	: mSpoutOut("Batchass Sky", vec2(640.0f, 480.0f))
 {
 	mWaveDelay = mFadeInDelay = mFadeOutDelay = true;
 	// Settings
@@ -258,7 +259,7 @@ void BatchassSkyApp::draw()
 		mFbo->unbindFramebuffer();
 		mRenderFbo->getColorTexture()->unbind();
 		mRenderFbo->getColorTexture()->unbind();
-
+		mSpoutOut.sendViewport();
 		//aShader->unbind();
 		//sTextures[5] = mVDFbos[mVDSettings->mMixFboIndex]->getTexture();
 

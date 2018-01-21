@@ -30,6 +30,8 @@ along with Cinder-Warping.  If not, see <http://www.gnu.org/licenses/>.
 #include "VDSettings.h"
 // Session
 #include "VDSession.h"
+// Spout Output
+#include "CiSpoutOut.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -42,8 +44,8 @@ using namespace VideoDromm;
 class BatchassSkyApp : public App {
 public:
 	static void					prepare(Settings *settings);
-
-	void						setup() override;
+	BatchassSkyApp();
+	// void						setup() override;
 	void						cleanup() override;
 	void						update() override;
 	void						draw() override;
@@ -59,6 +61,7 @@ public:
 	void						keyUp(KeyEvent event) override;
 
 	void						updateWindowTitle();
+	SpoutOut					mSpoutOut;
 private:
 	// Settings
 	VDSettingsRef				mVDSettings;
