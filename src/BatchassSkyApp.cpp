@@ -248,8 +248,8 @@ void BatchassSkyApp::draw()
 		aShader->uniform("iSeed", mVDSettings->iSeed);
 		aShader->uniform("iFlipH", 0);
 		aShader->uniform("iFlipV", 0);
-		aShader->uniform("iParam1", mVDSettings->iParam1);
-		aShader->uniform("iParam2", mVDSettings->iParam2);
+		//aShader->uniform("iParam1", mVDSettings->iParam1);
+		//aShader->uniform("iParam2", mVDSettings->iParam2);
 		aShader->uniform("iXorY", mVDSettings->iXorY);
 
 		mRenderFbo->getColorTexture()->bind(0);
