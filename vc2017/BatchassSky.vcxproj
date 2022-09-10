@@ -1,30 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
+    <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
+    <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{522853D3-7D00-42AF-98CF-4AB21C46E093}</ProjectGuid>
+    <ProjectGuid>{77893357-DBFA-4F6D-9ACD-B2D364BBD761}</ProjectGuid>
     <RootNamespace>BatchassSky</RootNamespace>
     <Keyword>Win32Proj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
@@ -32,57 +31,51 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">c:\tmp\$(TargetName)\$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">c:\tmp\$(TargetName)\$(Configuration)\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\include;..\..\..\Cinder\include;..\..\..\Cinder\include\asio;..\..\..\Cinder\blocks\Cinder-Hap2\src;..\..\..\Cinder\blocks\Cinder-Hap2\include\msw;..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui;..\..\..\Cinder\blocks\Cinder-ImGui\include;..\..\..\Cinder\blocks\Cinder-MIDI2\include;..\..\..\Cinder\blocks\Cinder-MIDI2\lib;..\..\..\Cinder\blocks\Cinder-MIDI2\src;..\..\..\Cinder\blocks\Cinder-Spout\include;..\..\..\Cinder\blocks\Cinder-Videodromm\include;..\..\..\Cinder\blocks\Cinder-Videodromm\src;..\..\..\Cinder\blocks\Cinder-Warping\include;..\..\..\Cinder\blocks\Cinder-WebSocketPP\src;..\..\..\Cinder\blocks\OSC\src\cinder\osc;..\..\..\Cinder\blocks\QuickTime\include\msw;..\..\..\Cinder\blocks\QuickTime\include;..\..\..\Cinder\blocks\UnionJack\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__WINDOWS_MM__;_WEBSOCKETPP_CPP11_TYPE_TRAITS_;WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\Cinder\include";..\..\..\Cinder\blocks\Cinder-HTTP\src;..\..\..\Cinder\blocks\Cinder-HTTP\lib\include;..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui;..\..\..\Cinder\blocks\Cinder-ImGui\include;..\..\..\Cinder\blocks\Cinder-MIDI2\include;..\..\..\Cinder\blocks\Cinder-MIDI2\lib;..\..\..\Cinder\blocks\Cinder-MIDI2\src;..\blocks\Spout\include;..\..\..\Cinder\blocks\Cinder-VDR\include;..\..\..\Cinder\blocks\Cinder-VDR\src;..\..\..\Cinder\blocks\Cinder-VDRUI\include;..\..\..\Cinder\blocks\Cinder-VDRUI\src;..\..\..\Cinder\blocks\Cinder-Warping\include;..\..\..\Cinder\blocks\Cinder-WebSocketPP\src;..\..\..\Cinder\include\asio;..\..\..\Cinder\blocks\Cinder-WMFVideo\src;..\..\..\Cinder\blocks\OSC\src</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WINDOWS_MM__;WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>"..\..\..\Cinder\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;cinder.lib;OpenGL32.lib;%(AdditionalDependencies);..\..\..\Cinder\blocks\Cinder-Spout\lib\Spout.lib;..\..\..\Cinder\blocks\QuickTime\lib\msw\x86\CVClient.lib;..\..\..\Cinder\blocks\QuickTime\lib\msw\x86\QTMLClient.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\Cinder\lib\msw\$(PlatformTarget);..\..\..\Cinder\lib\msw\$(PlatformTarget)\$(Configuration)\$(PlatformToolset)\;..\..\..\Cinder\blocks\Cinder-Videodromm\lib;..\..\..\Cinder\blocks\Cinder-WebSocketPP\lib\msw</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cinder.lib;OpenGL32.lib;%(AdditionalDependencies);..\..\..\Cinder\blocks\Cinder-HTTP\lib\msw\Debug\libeay32MT.lib;..\..\..\Cinder\blocks\Cinder-HTTP\lib\msw\Debug\ssleay32MT.lib;winmm.lib;..\blocks\Spout\lib\Spout.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"..\..\..\Cinder\lib\msw\$(PlatformTarget)";"..\..\..\Cinder\lib\msw\$(PlatformTarget)\$(Configuration)\$(PlatformToolset)";..\..\..\Cinder\blocks\Cinder-WebSocketPP\lib\msw</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
-      <TargetMachine>MachineX86</TargetMachine>
       <IgnoreSpecificDefaultLibraries>LIBCMT;LIBCPMT</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "..\..\..\Cinder\blocks\Cinder-Spout\lib\Spout.dll" "$(OutDir)"
-xcopy /y "..\..\..\Cinder\blocks\Cinder-Spout\lib\SpoutPanel.exe" "$(OutDir)"</Command>
+      <Command>xcopy /y "..\blocks\Spout\lib\Spout.dll" "$(OutDir)"
+xcopy /y "..\blocks\Spout\lib\SpoutPanel.exe" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\include;..\..\..\Cinder\include;..\..\..\Cinder\include\asio;..\..\..\Cinder\blocks\Cinder-Hap2\src;..\..\..\Cinder\blocks\Cinder-Hap2\include\msw;..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui;..\..\..\Cinder\blocks\Cinder-ImGui\include;..\..\..\Cinder\blocks\Cinder-MIDI2\include;..\..\..\Cinder\blocks\Cinder-MIDI2\lib;..\..\..\Cinder\blocks\Cinder-MIDI2\src;..\..\..\Cinder\blocks\Cinder-Spout\include;..\..\..\Cinder\blocks\Cinder-Videodromm\include;..\..\..\Cinder\blocks\Cinder-Videodromm\src;..\..\..\Cinder\blocks\Cinder-Warping\include;..\..\..\Cinder\blocks\Cinder-WebSocketPP\src;..\..\..\Cinder\blocks\OSC\src\cinder\osc;..\..\..\Cinder\blocks\QuickTime\include\msw;..\..\..\Cinder\blocks\QuickTime\include;..\..\..\Cinder\blocks\UnionJack\include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>__WINDOWS_MM__;_WEBSOCKETPP_CPP11_TYPE_TRAITS_;WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\include;"..\..\..\Cinder\include";..\..\..\Cinder\blocks\Cinder-HTTP\src;..\..\..\Cinder\blocks\Cinder-HTTP\lib\include;..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui;..\..\..\Cinder\blocks\Cinder-ImGui\include;..\..\..\Cinder\blocks\Cinder-MIDI2\include;..\..\..\Cinder\blocks\Cinder-MIDI2\lib;..\..\..\Cinder\blocks\Cinder-MIDI2\src;..\blocks\Spout\include;..\..\..\Cinder\blocks\Cinder-VDR\include;..\..\..\Cinder\blocks\Cinder-VDR\src;..\..\..\Cinder\blocks\Cinder-VDRUI\include;..\..\..\Cinder\blocks\Cinder-VDRUI\src;..\..\..\Cinder\blocks\Cinder-Warping\include;..\..\..\Cinder\blocks\Cinder-WebSocketPP\src;..\..\..\Cinder\include\asio;..\..\..\Cinder\blocks\Cinder-WMFVideo\src;..\..\..\Cinder\blocks\OSC\src</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>__WINDOWS_MM__;WIN32;_WIN32_WINNT=0x0601;_WINDOWS;NOMINMAX;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
@@ -96,8 +89,8 @@
       <AdditionalIncludeDirectories>"..\..\..\Cinder\include";..\include</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>winmm.lib;cinder.lib;OpenGL32.lib;%(AdditionalDependencies);..\..\..\Cinder\blocks\Cinder-Spout\lib\Spout.lib;..\..\..\Cinder\blocks\QuickTime\lib\msw\x86\CVClient.lib;..\..\..\Cinder\blocks\QuickTime\lib\msw\x86\QTMLClient.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\Cinder\lib\msw\$(PlatformTarget);..\..\..\Cinder\lib\msw\$(PlatformTarget)\$(Configuration)\$(PlatformToolset)\;..\..\..\Cinder\blocks\Cinder-Videodromm\lib;..\..\..\Cinder\blocks\Cinder-WebSocketPP\lib\msw</AdditionalLibraryDirectories>
+      <AdditionalDependencies>cinder.lib;OpenGL32.lib;%(AdditionalDependencies);..\..\..\Cinder\blocks\Cinder-HTTP\lib\msw\Release\libeay32MT.lib;..\..\..\Cinder\blocks\Cinder-HTTP\lib\msw\Release\ssleay32MT.lib;winmm.lib;..\blocks\Spout\lib\Spout.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>"..\..\..\Cinder\lib\msw\$(PlatformTarget)";"..\..\..\Cinder\lib\msw\$(PlatformTarget)\$(Configuration)\$(PlatformToolset)";..\..\..\Cinder\blocks\Cinder-WebSocketPP\lib\msw</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <GenerateMapFile>true</GenerateMapFile>
       <SubSystem>Windows</SubSystem>
@@ -105,124 +98,148 @@
       <EnableCOMDATFolding />
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <DataExecutionPrevention />
-      <TargetMachine>MachineX86</TargetMachine>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "..\..\..\Cinder\blocks\Cinder-Spout\lib\Spout.dll" "$(OutDir)"
-xcopy /y "..\..\..\Cinder\blocks\Cinder-Spout\lib\SpoutPanel.exe" "$(OutDir)"</Command>
+      <Command>xcopy /y "..\blocks\Spout\lib\Spout.dll" "$(OutDir)"
+xcopy /y "..\blocks\Spout\lib\SpoutPanel.exe" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ResourceCompile Include="Resources.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="..\assets\warps.xml" />
-    <Xml Include="Debug\VDSettings.xml" />
-    <Xml Include="Release\VDSettings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\assets\mix.frag" />
+    <None Include="..\assets\audio.json" />
     <None Include="..\assets\shader.cont" />
     <None Include="..\assets\shader.eval" />
     <None Include="..\assets\shader.frag" />
     <None Include="..\assets\shader.geom" />
     <None Include="..\assets\shader.vert" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDMix.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDShader.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDTexture.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUI.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIAnimation.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIAudio.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIBlend.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIChannels.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIColor.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIFbos.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIMidi.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIMouse.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIOsc.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIRender.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIShaders.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUITempo.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUITextures.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIWarps.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUIWebsockets.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDWebsocket.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.h" />
-    <ClInclude Include="..\..\..\Cinder\samples\_audio\common\AudioDrawUtils.h" />
-    <ClInclude Include="..\include\BatchassSkyApp.h" />
     <ClInclude Include="..\include\Resources.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\HapSupport.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\MovieHap.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\connector.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\error_codes.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\handshaker.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\headers.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\http.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\parsers.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\request_response.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\requester.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\responder.hpp" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-HTTP\src\cinder\http\url.hpp" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\include\CinderImGui.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\include\imgui_user.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\include\imgui_user.inl" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imconfig.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui_internal.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiConstants.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiExceptions.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiHeaders.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiHub.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiIn.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiMessage.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\include\MidiOut.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-MIDI2\lib\RtMidi.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\LiveParam.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDAnimation.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDFbo.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDLog.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDRouter.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDSession.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDSettings.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\VDUtils.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Videodromm\include\Watchdog.h" />
+    <ClInclude Include="..\blocks\Spout\include\CiSpoutIn.h" />
+    <ClInclude Include="..\blocks\Spout\include\CiSpoutOut.h" />
+    <ClInclude Include="..\blocks\Spout\include\Spout.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutCommon.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutCopy.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutDirectX.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutGLDXinterop.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutGLextensions.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutMemoryShare.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutReceiver.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutSDK.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutSender.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutSenderNames.h" />
+    <ClInclude Include="..\blocks\Spout\include\SpoutSharedMemory.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDAnimation.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDFboShader.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDJsonManager.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDKeyboard.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDLog.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDMediator.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDMidi.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDMix.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDOscObserver.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDOscReceiver.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDParams.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDSession.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDSessionFacade.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDSettings.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDTypes.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDUIObserver.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDUIParams.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDUniforms.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDR\include\VDWebsocket.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDRUI\include\VDUI.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDRUI\include\VDUIAnimation.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDRUI\include\VDUIFbos.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDRUI\include\VDUITextures.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-VDRUI\include\VDUIWarps.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-Warping\include\Warp.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketClient.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketConnection.h" />
     <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketServer.h" />
-    <ClInclude Include="..\..\..\Cinder\blocks\UnionJack\include\UnionJack.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\ciWMFVideoPlayer.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\ciWMFVideoPlayerUtils.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\EVRPresenter.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\EVRPresenterUuid.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\PresentEngine.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\Presenter.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\PresenterHelpers.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\scheduler.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\AsyncCB.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\BufferLock.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\ClassFactory.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\common.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\critsec.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\GrowArray.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\linklist.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\logging.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\logmediatype.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\mediatype.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\mfutils.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\PropVar.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\registry.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\TinyMap.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\common\trace.h" />
+    <ClInclude Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiIn.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiMessage.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDMix.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDShader.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDTexture.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUI.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIAnimation.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIAudio.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIBlend.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIChannels.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIColor.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIFbos.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIMidi.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIMouse.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIOsc.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIRender.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIShaders.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUITempo.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUITextures.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIWarps.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUIWebsockets.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDWebsocket.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.cpp" />
-    <ClCompile Include="..\..\..\Cinder\samples\_audio\common\AudioDrawUtils.cpp" />
     <ClCompile Include="..\src\BatchassSkyApp.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\MovieHap.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Hap2\src\HapSupport.c" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\src\CinderImGui.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-ImGui\lib\imgui\imgui_demo.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\lib\RtMidi.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiHub.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiIn.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiMessage.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\src\MidiOut.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\LiveParam.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDAnimation.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDFbo.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDLog.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDRouter.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDSession.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDSettings.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Videodromm\src\VDUtils.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-MIDI2\lib\RtMidi.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDAnimation.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDFboShader.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDJsonManager.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDKeyboard.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDLog.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDMediator.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDMidi.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDMix.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDOscReceiver.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDParams.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDSession.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDSessionFacade.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDSettings.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDUniforms.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDR\src\VDWebsocket.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDRUI\src\VDUI.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDRUI\src\VDUIAnimation.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDRUI\src\VDUIFbos.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDRUI\src\VDUITextures.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-VDRUI\src\VDUIWarps.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Warping\src\Warp.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Warping\src\WarpBilinear.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-Warping\src\WarpPerspective.cpp" />
@@ -230,7 +247,13 @@
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketClient.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketConnection.cpp" />
     <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WebSocketPP\src\WebSocketServer.cpp" />
-    <ClCompile Include="..\..\..\Cinder\blocks\UnionJack\src\UnionJack.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\ciWMFVideoPlayer.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\ciWMFVideoPlayerUtils.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\PresentEngine.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\Presenter.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\PresenterHelpers.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\Cinder-WMFVideo\src\presenter\scheduler.cpp" />
+    <ClCompile Include="..\..\..\Cinder\blocks\OSC\src\cinder\osc\Osc.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
